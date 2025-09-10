@@ -143,21 +143,19 @@ const SignUp = () => {
               />
             </View>
 
-            {/* Login Button */}
+            {/* Sign Up Button */}
             <TouchableOpacity
-              style={mobStyles.loginButton}
-              onPress={handleLogin}
+              style={mobStyles.signUpButton}
+              onPress={handleSignUp}
             >
-              <Text style={mobStyles.loginButtonText}>Sign UP</Text>
+              <Text style={mobStyles.signUpButtonText}>Sign UP</Text>
             </TouchableOpacity>
 
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontSize: 14, color: "#666" }}>
                 By continuing, you agree to our Terms of Service and
               </Text>
-              <Text style={{ fontSize: 14, color: "#666", textAlign: "center", marginTop: 2, marginBottom: 10 }}>
-                Privacy Policy.
-              </Text>
+              <Text style={mobStyles.privacyPolicyText}>Privacy Policy.</Text>
             </View>
             <View style={{ marginBottom: 20 }}>
               <Text style={{ fontSize: 16, color: "#666666ff" }}>
@@ -186,7 +184,7 @@ const SignUp = () => {
                 style={{ width: 100, height: 80 }}
               />
               <Text style={webStyles.text}>Sign UP</Text>
-              <View style={{ ...webStyles.inputRow, marginTop: 10 }}>
+              <View style={webStyles.inputRow}>
                 <View style={{ flexDirection: "column", width: "50%" }}>
                   <Text style={webStyles.labelText}>First Name</Text>
                   <TextInput
@@ -202,7 +200,7 @@ const SignUp = () => {
                   />
                 </View>
               </View>
-              <View style={{ ...webStyles.inputRow, marginTop: 5 }}>
+              <View style={webStyles.inputRow}>
                 <View style={{ flexDirection: "column", width: "50%" }}>
                   <Text style={webStyles.labelText}>E-Mail Address</Text>
                   <TextInput
@@ -218,13 +216,7 @@ const SignUp = () => {
                   />
                 </View>
               </View>
-              <View
-                style={{
-                  ...webStyles.inputRow,
-                  marginTop: 5,
-                  marginBottom: 10,
-                }}
-              >
+              <View style={webStyles.inputRow}>
                 <View style={{ flexDirection: "column", width: "50%" }}>
                   <Text style={webStyles.labelText}>Password</Text>
                   <TextInput
@@ -241,7 +233,7 @@ const SignUp = () => {
                 </View>
               </View>
               <TouchableOpacity style={webStyles.button} onPress={handleLogin}>
-                <Text style={webStyles.loginButtonText}>Sign UP </Text>
+                <Text style={webStyles.signUpButtonText}>Sign UP </Text>
               </TouchableOpacity>
               <View style={{ marginTop: 10 }}>
                 <Text style={{ fontSize: 12, color: "#666" }}>
@@ -253,7 +245,7 @@ const SignUp = () => {
                 <Text style={{ fontSize: 14, color: "#666666ff" }}>
                   Already have an account?{" "}
                   <Text style={{ color: "blue" }} onPress={handleLogin}>
-                    Sign In
+                    Login Here
                   </Text>
                 </Text>
               </View>
@@ -278,7 +270,6 @@ const mobStyles = StyleSheet.create({
     height: 100,
     alignSelf: "center",
     marginTop: 30,
-    // marginBottom: 10,
   },
   title: {
     fontSize: 28,
@@ -286,17 +277,7 @@ const mobStyles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#333",
   },
-  forgotPasswordContainer: {
-    alignSelf: "flex-end",
-    marginBottom: 30,
-    marginTop: -8,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    fontWeight: "400",
-    color: "blue",
-  },
-  loginButton: {
+  signUpButton: {
     marginTop: 15,
     backgroundColor: "yellow",
     width: "80%",
@@ -305,7 +286,7 @@ const mobStyles = StyleSheet.create({
     padding: 15,
     borderRadius: 50,
   },
-  loginButtonText: {
+  signUpButtonText: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#000000ff",
@@ -330,6 +311,13 @@ const mobStyles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 3,
+  },
+  privacyPolicyText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 10,
   },
 });
 
@@ -360,15 +348,18 @@ const webStyles = StyleSheet.create({
     borderRadius: 10,
     width: "90%",
   },
-  inputRow: {
-    flexDirection: "row",
-    gap: 10,
-    width: "100%",
-  },
   text: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
+    marginBottom: 10,
+  },
+  inputRow: {
+    flexDirection: "row",
+    width: "100%",
+    marginTop: 5,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   labelText: {
     marginBottom: 5,
@@ -380,19 +371,13 @@ const webStyles = StyleSheet.create({
     marginBottom: 10,
     width: "80%",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "#807f7fff",
     padding: 5,
     height: 40,
-    backgroundColor: "#f9f9f9",
-  },
-  forgetPassText: {
-    marginBottom: 10,
-    fontSize: 12,
-    textAlign: "right",
-    color: "blue",
+    backgroundColor: "#ebeaeaff",
   },
   button: {
-    marginTop: 10,
+    marginTop: 20,
     backgroundColor: "yellow",
     padding: 15,
     borderRadius: 50,
@@ -405,31 +390,9 @@ const webStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 3,
   },
-  loginButtonText: {
+  signUpButtonText: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#000000ff",
-  },
-  socialText: { marginBottom: 10, fontSize: 16, color: "#000" },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    gap: 10,
-    width: "80%",
-  },
-  socialButton: {
-    backgroundColor: "#fdfdfdff",
-    padding: 5,
-    borderRadius: 5,
-    marginBottom: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 40,
-    height: 40,
-    shadowColor: "#000",
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 3,
   },
 });

@@ -139,9 +139,7 @@ const Login = () => {
               <Text style={{ fontSize: 14, color: "#666" }}>
                 By continuing, you agree to our Terms of Service and
               </Text>
-              <Text style={{ fontSize: 14, color: "#666", textAlign: "center", marginTop: 2, marginBottom: 10 }}>
-                Privacy Policy.
-              </Text>
+              <Text style={mobStyles.privacyPolicyText}>Privacy Policy.</Text>
             </View>
             <View style={{ marginBottom: 20 }}>
               <Text style={{ fontSize: 16, color: "#666666ff" }}>
@@ -171,15 +169,9 @@ const Login = () => {
               />
               <Text style={webStyles.text}>Login</Text>
               <Text style={webStyles.labelText}>E-Mail/Phone</Text>
-              <TextInput
-                keyboardType="default"
-                style={webStyles.textInput}
-              />
+              <TextInput keyboardType="default" style={webStyles.textInput} />
               <Text style={webStyles.labelText}>Password</Text>
-              <TextInput
-                secureTextEntry
-                style={webStyles.textInput}
-              />
+              <TextInput secureTextEntry style={webStyles.textInput} />
               <TouchableOpacity
                 onPress={handleForgetPassword}
                 style={{ width: "80%" }}
@@ -282,7 +274,6 @@ const mobStyles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000000ff",
   },
-  socialText: { marginBottom: 10, fontSize: 16, color: "#000" },
   socialButtonContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -302,6 +293,13 @@ const mobStyles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 3,
+  },
+  privacyPolicyText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    marginTop: 2,
+    marginBottom: 10,
   },
 });
 
@@ -347,10 +345,10 @@ const webStyles = StyleSheet.create({
     marginBottom: 10,
     width: "80%",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "#807f7fff",
     padding: 5,
     height: 40,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#ebeaeaff",
   },
   forgetPassText: {
     marginBottom: 10,
@@ -376,7 +374,11 @@ const webStyles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000000ff",
   },
-  socialText: { marginBottom: 10, fontSize: 16, color: "#000" },
+  socialText: {
+    marginBottom: 10,
+    fontSize: 16,
+    color: "#000",
+  },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
