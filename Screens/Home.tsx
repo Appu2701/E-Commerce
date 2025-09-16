@@ -1,10 +1,16 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import PageHeading from '../Components/PageHeading'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Home!</Text>
+    <View style={{ flex: 1 }}>
+      <PageHeading />
+      {/* <ScrollView contentContainerStyle={styles.container}>
+        <View style={{ height: 1200 , width: '100%', backgroundColor: '#24a720ff' }} />
+        <Text style={styles.title}>Welcome to Home!</Text>
+      </ScrollView> */}
     </View>
   )
 }
@@ -17,6 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
+    padding: 16,
   },
   title: {
     fontSize: 24,

@@ -14,7 +14,6 @@ import FloatingLabelInput from "../Components/FloatingLabelInput";
 
 const SignUp = () => {
   const navigation = useNavigation<SignUpScreenNavigationProp>();
-
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -22,14 +21,23 @@ const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     // Navigate to Login screen
     navigation.navigate("Login");
+    console.log("Navigating to Login screen");
+    console.log("First Name:", firstName);
+    console.log("Last Name:", lastName);
+    console.log("Email:", email);
+    console.log("Phone:", phone);
+    console.log("Password:", password);
+    console.log("Confirm Password:", confirmPassword);
   };
 
-  const handleSignUp = () => {
+  const handleLogin = () => {
     navigation.navigate("Login");
+    console.log("Navigating to Login screen");
   };
+
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
@@ -160,7 +168,7 @@ const SignUp = () => {
             <View style={{ marginBottom: 20 }}>
               <Text style={{ fontSize: 16, color: "#666666ff" }}>
                 Already have an account?{" "}
-                <Text style={{ color: "blue" }} onPress={handleSignUp}>
+                <Text style={{ color: "blue" }} onPress={handleLogin}>
                   Login here
                 </Text>
               </Text>
@@ -232,7 +240,7 @@ const SignUp = () => {
                   />
                 </View>
               </View>
-              <TouchableOpacity style={webStyles.button} onPress={handleLogin}>
+              <TouchableOpacity style={webStyles.button} onPress={handleSignUp}>
                 <Text style={webStyles.signUpButtonText}>Sign UP </Text>
               </TouchableOpacity>
               <View style={{ marginTop: 10 }}>

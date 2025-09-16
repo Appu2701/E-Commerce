@@ -7,29 +7,86 @@ import {
   TextInput,
   Image,
   Platform,
+  ActivityIndicator,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import { LoginScreenNavigationProp } from "../types/navigation";
 import FloatingLabelInput from "../Components/FloatingLabelInput";
+import { API_BASE_URL } from "../config/api";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
+  const { setUserData, setIsLoggedIn } = useUser();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const handleLogin = () => {
-    // Navigate to Test screen
-    navigation.navigate("Test");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError("Please enter both email/phone and password");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userName: email, // Assuming email is used as userName
+          password: password,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Save user data to AsyncStorage and context
+        await AsyncStorage.setItem('isLoggedIn', 'true');
+        await AsyncStorage.setItem('userData', JSON.stringify(data));
+        
+        // Update context
+        setUserData(data);
+        setIsLoggedIn(true);
+        
+        navigation.navigate("Home");
+        console.log("Login successful", data);
+      } else {
+        setError(data.message || "Login failed");
+      }
+    } catch (err) {
+      setError("Network error. Please try again.");
+      console.error("Login error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    console.log("Google Login pressed");
+  };
+  const handleFacebookLogin = () => {
+    console.log("Facebook Login pressed");
+  };
+  const handleTwitterLogin = () => {
+    console.log("Twitter Login pressed");
+  };
+  const handleLinkedInLogin = () => {
+    console.log("LinkedIn Login pressed");
   };
 
   const handleForgetPassword = () => {
     navigation.navigate("ForgetPassword");
+    console.log("Forgot Password pressed");
   };
 
   const handleSignUp = () => {
     navigation.navigate("SignUp");
+    console.log("Sign Up pressed");
   };
 
   return (
@@ -98,9 +155,17 @@ const Login = () => {
             <TouchableOpacity
               style={mobStyles.loginButton}
               onPress={handleLogin}
+              disabled={loading}
             >
-              <Text style={mobStyles.loginButtonText}>Login</Text>
+              {loading ? (
+                <ActivityIndicator size="small" color="#000" />
+              ) : (
+                <Text style={mobStyles.loginButtonText}>Login</Text>
+              )}
             </TouchableOpacity>
+            {error ? (
+              <Text style={mobStyles.errorText}>{error}</Text>
+            ) : null}
 
             <Text style={{ marginBottom: 10, fontSize: 16, color: "#000" }}>
               Or Login with
@@ -111,13 +176,19 @@ const Login = () => {
                 style={mobStyles.socialButton}
                 onPress={handleLogin}
               >
-                <FontAwesome name="google" size={24} color="#EA4335" />
+                <Image
+                  source={require("../assets/google.png")}
+                  style={{ width: 32, height: 32 }}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={mobStyles.socialButton}
                 onPress={handleLogin}
               >
-                <FontAwesome name="facebook" size={24} color="#1877F3" />
+                <Image
+                  source={require("../assets/facebook.png")}
+                  style={{ width: 32, height: 32 }}
+                />
               </TouchableOpacity>
             </View>
             <View style={mobStyles.socialButtonContainer}>
@@ -125,13 +196,19 @@ const Login = () => {
                 style={mobStyles.socialButton}
                 onPress={handleLogin}
               >
-                <FontAwesome name="twitter" size={24} color="#1DA1F2" />
+                <Image
+                  source={require("../assets/twitter.png")}
+                  style={{ width: 32, height: 32 }}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={mobStyles.socialButton}
                 onPress={handleLogin}
               >
-                <FontAwesome name="linkedin" size={24} color="#0A66C2" />
+                <Image
+                  source={require("../assets/linkedin.png")}
+                  style={{ width: 32, height: 32 }}
+                />
               </TouchableOpacity>
             </View>
 
@@ -169,43 +246,48 @@ const Login = () => {
               />
               <Text style={webStyles.text}>Login</Text>
               <Text style={webStyles.labelText}>E-Mail/Phone</Text>
-              <TextInput keyboardType="default" style={webStyles.textInput} />
+              <TextInput keyboardType="default" style={webStyles.textInput} 
+              onChangeText={setEmail} />
               <Text style={webStyles.labelText}>Password</Text>
-              <TextInput secureTextEntry style={webStyles.textInput} />
-              <TouchableOpacity
-                onPress={handleForgetPassword}
-                style={{ width: "80%" }}
-              >
+              <TextInput secureTextEntry style={webStyles.textInput} onChangeText={setPassword} />
+              <TouchableOpacity onPress={handleForgetPassword} style={{ width: "80%" }}>
                 <Text style={webStyles.forgetPassText}>Forgot Password?</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={webStyles.button} onPress={handleLogin}>
-                <Text style={webStyles.loginButtonText}>Login </Text>
+              <TouchableOpacity style={webStyles.button} onPress={handleLogin} disabled={loading}>
+                {loading ? (
+                  <ActivityIndicator size="small" color="#000" />
+                ) : (
+                  <Text style={webStyles.loginButtonText}>Login </Text>
+                )}
               </TouchableOpacity>
+              {error ? (
+                <Text style={webStyles.errorText}>{error}</Text>
+              ) : null}
               <Text style={webStyles.socialText}>Or Login with</Text>
               <View style={webStyles.buttonContainer}>
-                <TouchableOpacity
-                  style={webStyles.socialButton}
-                  onPress={handleLogin}
-                >
-                  <FontAwesome name="google" size={24} color="#EA4335" />
+                <TouchableOpacity style={webStyles.socialButton} onPress={handleGoogleLogin}>
+                  <Image
+                    source={require("../assets/google.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={webStyles.socialButton}
-                  onPress={handleLogin}
-                >
-                  <FontAwesome name="facebook" size={24} color="#1877F3" />
+                <TouchableOpacity style={webStyles.socialButton} onPress={handleFacebookLogin}>
+                  <Image
+                    source={require("../assets/facebook.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={webStyles.socialButton}
-                  onPress={handleLogin}
-                >
-                  <FontAwesome name="twitter" size={24} color="#1DA1F2" />
+                <TouchableOpacity style={webStyles.socialButton} onPress={handleTwitterLogin}>
+                  <Image
+                    source={require("../assets/twitter.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={webStyles.socialButton}
-                  onPress={handleLogin}
-                >
-                  <FontAwesome name="linkedin" size={24} color="#0A66C2" />
+                <TouchableOpacity style={webStyles.socialButton} onPress={handleLinkedInLogin}>
+                  <Image
+                    source={require("../assets/linkedin.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
                 </TouchableOpacity>
               </View>
               <View style={{ marginTop: 20 }}>
@@ -301,6 +383,12 @@ const mobStyles = StyleSheet.create({
     marginTop: 2,
     marginBottom: 10,
   },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 10,
+  },
 });
 
 const webStyles = StyleSheet.create({
@@ -388,16 +476,22 @@ const webStyles = StyleSheet.create({
   socialButton: {
     backgroundColor: "#fdfdfdff",
     padding: 5,
-    borderRadius: 50,
+    borderRadius: 5,
     marginBottom: 5,
     justifyContent: "center",
     alignItems: "center",
-    width: "20%",
-    height: 40,
+    width: 50,
+    height: 50,
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 3,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 10,
   },
 });

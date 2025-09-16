@@ -48,11 +48,14 @@ const ForgetPassword = () => {
           <View style={{ flex: 1, alignItems: "center" }}>
             <View style={mobStyles.otpContainer}>
               <View style={mobStyles.rowFlex}>
-                <FontAwesome name="envelope" size={28} color="#000" />
+                <Image
+                  source={require("../assets/email.png")}
+                  style={{ width: 34, height: 34 }}
+                />
                 <Text style={mobStyles.rowText}>abc********@example.com</Text>
               </View>
               <TouchableOpacity
-                style={mobStyles.rowFlex}
+                style={{ ...mobStyles.rowFlex, gap: 10 }}
                 onPress={() => setEmailAgree(!emailagree)}
               >
                 <FontAwesome
@@ -67,11 +70,14 @@ const ForgetPassword = () => {
             </View>
             <View style={mobStyles.otpContainer}>
               <View style={mobStyles.rowFlex}>
-                <FontAwesome name="phone" size={28} color="#000" />
+                <Image
+                  source={require("../assets/phone-call.png")}
+                  style={{ width: 34, height: 34 }}
+                />
                 <Text style={mobStyles.rowText}>123******89</Text>
               </View>
               <TouchableOpacity
-                style={mobStyles.rowFlex}
+                style={{ ...mobStyles.rowFlex, gap: 10 }}
                 onPress={() => setPhoneAgree(!phoneAgree)}
               >
                 <FontAwesome
@@ -217,11 +223,14 @@ const ForgetPassword = () => {
               <Text style={webStyles.text}>Reset Password</Text>
               <View style={webStyles.otpContainer}>
                 <View style={webStyles.rowFlex}>
-                  <FontAwesome name="envelope" size={28} color="#000" />
+                  <Image
+                    source={require("../assets/email.png")}
+                    style={{ width: 34, height: 34 }}
+                  />
                   <Text style={webStyles.rowText}>abc********@example.com</Text>
                 </View>
                 <TouchableOpacity
-                  style={webStyles.rowFlex}
+                  style={{ ...webStyles.rowFlex, gap: 10 }}
                   onPress={() => setEmailAgree(!emailagree)}
                 >
                   <FontAwesome
@@ -236,11 +245,14 @@ const ForgetPassword = () => {
               </View>
               <View style={[webStyles.otpContainer, { marginTop: 20 }]}>
                 <View style={webStyles.rowFlex}>
-                  <FontAwesome name="phone" size={28} color="#000" />
+                  <Image
+                    source={require("../assets/phone-call.png")}
+                    style={{ width: 34, height: 34 }}
+                  />
                   <Text style={webStyles.rowText}>123******89</Text>
                 </View>
                 <TouchableOpacity
-                  style={webStyles.rowFlex}
+                  style={{ ...webStyles.rowFlex, gap: 10 }}
                   onPress={() => setPhoneAgree(!phoneAgree)}
                 >
                   <FontAwesome
@@ -384,7 +396,7 @@ const mobStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 10,
+    // gap: 5,
   },
   rowText: {
     fontSize: 20,
@@ -554,7 +566,7 @@ const webStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 10,
+    // gap: 5,
   },
   rowText: {
     fontSize: 20,
