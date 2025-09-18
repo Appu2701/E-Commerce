@@ -1,8 +1,7 @@
-import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { ProfileScreenNavigationProp } from "../types/navigation";
 import { useNavigation } from "@react-navigation/native";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { useUser } from "../context/UserContext";
 
@@ -10,8 +9,10 @@ const PageHeading = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const { userData } = useUser();
 
-    // Get user's display name
-  const displayName = userData?.data ? `${userData.data.firstName} ${userData.data.lastName}` : "User";
+  // Get user's display name
+  const displayName = userData?.data
+    ? `${userData.data.firstName} ${userData.data.lastName}`
+    : "User";
 
   const handleProfile = () => {
     console.log("Profile Clicked");
@@ -59,6 +60,19 @@ const PageHeading = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
+            handleMyOrders();
+          }}
+        >
+          <Image
+            source={require("../assets/shopping-cart.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Text style={{ fontSize: 16, fontWeight: "bold" }}>My Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
             handleProfile();
           }}
         >
@@ -69,21 +83,6 @@ const PageHeading = () => {
           />
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             {displayName}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            handleMyOrders();
-          }}
-        >
-          <Image
-            source={require("../assets/shopping-cart.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-            My Orders
           </Text>
         </TouchableOpacity>
       </View>
@@ -105,21 +104,20 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   leftContainer: {
-    // backgroundColor: "#fff",
     padding: 15,
     borderRadius: 5,
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
   },
+  logo: {
+    width: 40,
+    height: 40,
+  },
   text: {
     color: "#000",
     fontSize: 20,
     fontWeight: "bold",
-  },
-  logo: {
-    width: 40,
-    height: 40,
   },
   centerContainer: {
     flex: 1,

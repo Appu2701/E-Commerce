@@ -1,32 +1,63 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import PageHeading from '../Components/PageHeading'
-import { ScrollView } from 'react-native-gesture-handler'
+import {
+  View,
+  StyleSheet,
+  Platform,
+  ScrollView,
+  Dimensions,
+} from "react-native";
+import PageHeading from "../Components/PageHeading";
+import ProductCategory from "../Components/ProductCategory";
+import MobileHome from "./MobileHome";
+import DealsPage from "./HomeComponents/DealsPage";
+import PopularStore from "./HomeComponents/PopularSore";
+import PopularProduct from "./HomeComponents/PopularProduct";
+import TrendingStore from "./HomeComponents/TrendingStore";
+import TrendingProduct from "./HomeComponents/TrendingProduct";
+import Banner from "./HomeComponents/Banner";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <PageHeading />
-      {/* <ScrollView contentContainerStyle={styles.container}>
-        <View style={{ height: 1200 , width: '100%', backgroundColor: '#24a720ff' }} />
-        <Text style={styles.title}>Welcome to Home!</Text>
-      </ScrollView> */}
-    </View>
-  )
-}
+    <>
+      {Platform.OS === "android" || Platform.OS === "ios" ? (
+        <MobileHome />
+      ) : (
+        <View style={webStyles.container}>
+          <PageHeading />
+          <ScrollView
+            style={webStyles.scrollView}
+            showsVerticalScrollIndicator={false}
+          >
+            <ProductCategory />
+            <Banner />
+            <DealsPage />
+            <TrendingStore />
+            <TrendingProduct />
+            <PopularStore />
+            <PopularProduct />
+            <Footer />
+          </ScrollView>
+        </View>
+      )}
+    </>
+  );
+};
 
-export default Home
+export default Home;
 
-const styles = StyleSheet.create({
+const { height: screenHeight } = Dimensions.get("window");
+const webStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 16,
+    flexDirection: "column",
+    height: screenHeight,
+    maxHeight: 535,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-})
+  scrollView: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
+    height: screenHeight - 100, // Adjust 100 to your header height
+    overflow: "hidden",
+    padding: 10,
+  }
+});
