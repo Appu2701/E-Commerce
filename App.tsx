@@ -10,6 +10,9 @@ import Test from './Screens/Test';
 import SignUp from './Screens/SignUp';
 import ForgetPassword from './Screens/ForgetPassword';
 import Profile from './Screens/Profile';
+import Orders from './Screens/Orders';
+import Address from './Screens/MyAddress';  
+import Cart from './Screens/Cart';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -24,6 +27,9 @@ export default function App() {
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Orders" component={Orders} />
+          <Stack.Screen name="Address" component={Address} />
+          <Stack.Screen name="Cart" component={Cart} />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>

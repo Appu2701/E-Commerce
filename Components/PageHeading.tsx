@@ -5,6 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { useUser } from "../context/UserContext";
 
+
 const PageHeading = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const { userData } = useUser();
@@ -20,19 +21,29 @@ const PageHeading = () => {
   };
 
   const handleMyOrders = () => {
+    navigation.navigate("Orders"); // Navigate to Orders screen
     console.log("My Orders Clicked");
+  };
+
+  const handleCart = () => {
+    navigation.navigate("Cart"); // Navigate to Cart screen
+    console.log("Cart Clicked");
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.leftContainer}>
+      <TouchableOpacity style={styles.leftContainer}
+        onPress={() => {
+          navigation.navigate("Home"); // Navigate to Home screen
+        }}
+      >
         <Image
           source={require("../assets/E-Commerce Logo.jpg")}
           style={styles.logo}
           resizeMode="contain"
         />
         <Text style={styles.text}>E-Commerce App</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.centerContainer}>
         <FontAwesome name="search" size={24} color="black" />
         <TextInput
@@ -41,7 +52,7 @@ const PageHeading = () => {
         />
       </View>
       <View style={styles.rightContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleCart}>
           <Image
             source={require("../assets/Cart.png")}
             style={styles.logo}

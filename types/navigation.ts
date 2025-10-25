@@ -7,6 +7,9 @@ export type RootStackParamList = {
   ForgetPassword: undefined;
   Test: undefined;
   Profile: undefined;
+  Orders: undefined;
+  Address: undefined;
+  Cart: undefined;
 };
 
 export type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -15,3 +18,6 @@ export type SignUpScreenNavigationProp = StackNavigationProp<RootStackParamList,
 export type ForgetPasswordScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ForgetPassword'>;
 export type TestScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Test'>;
 export type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Profile'>;
+export type OrdersScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Orders'>;
+export type AddressScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Address'>;
+export type CartScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Cart'>;
