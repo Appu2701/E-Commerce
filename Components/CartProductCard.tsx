@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-interface CartProductProps {
+interface CartProductCardProps {
+  onCardClick?: () => void;
   productImage: any;
   productName: string;
   productBrand: string;
@@ -19,7 +20,8 @@ interface CartProductProps {
   totalPrice: string;
 }
 
-const CartProduct: React.FC<CartProductProps> = ({
+const CartProductCard: React.FC<CartProductCardProps> = ({
+  onCardClick,
   productImage,
   productName,
   productBrand,
@@ -37,7 +39,8 @@ const CartProduct: React.FC<CartProductProps> = ({
   totalPrice,
 }) => {
   return (
-    <View style={styles.cartItemContainer}>
+    <TouchableOpacity style={styles.cartItemContainer}
+      onPress={onCardClick}>
       {/* Left: Product Image - Full Height */}
       <Image source={productImage} style={styles.productImage} />
 
@@ -108,12 +111,13 @@ const CartProduct: React.FC<CartProductProps> = ({
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   cartItemContainer: {
+    height: 135,
     flexDirection: "row",
     backgroundColor: "#fff",
     borderRadius: 12,
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    marginVertical: 8,
+    marginVertical: 4,
   },
   productImage: {
     width: 100,
@@ -138,28 +142,28 @@ const styles = StyleSheet.create({
   
   // Row 1
   productName: {
-    fontSize: 18,
-    fontWeight: "600",
+    marginTop: -15,
+    fontSize: 22,
+    fontWeight: "bold",
     color: "#333",
-    marginBottom: 12,
+    marginBottom: 5,
   },
 
   // Row 2
   row2: {
     flexDirection: "row",
-    marginBottom: 12,
     gap: 12,
   },
   col1: {
     flex: 1,
   },
   brandText: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#333",
     marginBottom: 4,
   },
   categoryText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#666",
   },
   col2: {
@@ -171,7 +175,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   originalPrice: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#999",
     textDecorationLine: "line-through",
     marginRight: 8,
@@ -189,13 +193,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   discountText: {
-    fontSize: 11,
+    fontSize: 12,
     color: "#fff",
     fontWeight: "600",
   },
   offerText: {
     fontSize: 12,
     color: "#ff6b6b",
+    fontWeight: "600",
   },
   col3: {
     flex: 1,
@@ -240,55 +245,52 @@ const styles = StyleSheet.create({
   },
   saveBtn: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#007bff",
+    backgroundColor: "#007bff",
     borderRadius: 6,
     paddingVertical: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   saveBtnText: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
-    color: "#007bff",
+    color: "#fff",
   },
   removeBtn: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#dc3545",
+    backgroundColor: "#dc3545",
     borderRadius: 6,
     paddingVertical: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   removeBtnText: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
-    color: "#dc3545",
+    color: "#fff",
   },
   buyBtn: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#28a745",
+    backgroundColor: "#28a745",
     borderRadius: 6,
     paddingVertical: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   buyBtnText: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "600",
-    color: "#28a745",
+    color: "#fff",
   },
   totalSection: {
-    // width: '27%',
     alignItems: "flex-end",
     minWidth: 80,
   },
   totalLabel: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: "600",
     color: "#666",
-    marginBottom: 4,
+    // marginBottom: 4,
   },
   totalAmount: {
     fontSize: 20,
@@ -297,4 +299,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartProduct;
+export default CartProductCard;

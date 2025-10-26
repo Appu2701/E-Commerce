@@ -13,6 +13,15 @@ import Profile from './Screens/Profile';
 import Orders from './Screens/Orders';
 import Address from './Screens/MyAddress';  
 import Cart from './Screens/Cart';
+import WishList from './Screens/WishList';
+import Grocery from './Screens/Category/Grocery';
+import Electronics from './Screens/Category/Electronics';
+import Books from './Screens/Category/Books';
+import Toys from './Screens/Category/Toys';
+import Furniture from './Screens/Category/Furniture';
+import Mobiles from './Screens/Category/Mobiles';
+import Fashion from './Screens/Category/Fashion';
+import Sports from './Screens/Category/Sports';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -30,6 +39,15 @@ export default function App() {
           <Stack.Screen name="Orders" component={Orders} />
           <Stack.Screen name="Address" component={Address} />
           <Stack.Screen name="Cart" component={Cart} />
+          <Stack.Screen name="Wishlist" component={WishList} />
+          <Stack.Screen name="Grocery" component={Grocery} />
+          <Stack.Screen name="Electronics" component={Electronics} />
+          <Stack.Screen name="Sports" component={Sports} />
+          <Stack.Screen name="Fashion" component={Fashion} />
+          <Stack.Screen name="Mobiles" component={Mobiles} />
+          <Stack.Screen name="Furniture" component={Furniture} />
+          <Stack.Screen name="Books" component={Books} />
+          <Stack.Screen name="Toys" component={Toys} />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>

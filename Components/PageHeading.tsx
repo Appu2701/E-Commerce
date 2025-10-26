@@ -5,7 +5,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { useUser } from "../context/UserContext";
 
-
 const PageHeading = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const { userData } = useUser();
@@ -30,9 +29,15 @@ const PageHeading = () => {
     console.log("Cart Clicked");
   };
 
+  const handleWishlist = () => {
+    navigation.navigate("Wishlist"); // Navigate to Wishlist screen
+    console.log("Wishlist Clicked");
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.leftContainer}
+      <TouchableOpacity
+        style={styles.leftContainer}
         onPress={() => {
           navigation.navigate("Home"); // Navigate to Home screen
         }}
@@ -60,7 +65,12 @@ const PageHeading = () => {
           />
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>Cart</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            handleWishlist();
+          }}
+        >
           <Image
             source={require("../assets/Wishlist.png")}
             style={styles.logo}

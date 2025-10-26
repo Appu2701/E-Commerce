@@ -133,26 +133,26 @@ const OrderCard: React.FC<OrderCardProps> = ({
       </View>
       <View style={styles.orderDetailsContainer}>
         <View style={styles.orderTopRow}>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Product Name: {orderName}</Text>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Order ID: {orderId}</Text>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {amount} <Text style={{ fontWeight: "normal", fontSize: 16 }}>{`(${paymentType})`}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Product Name: {orderName}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Order ID: {orderId}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            {amount} <Text style={{ fontWeight: "normal", fontSize: 14 }}>{`(${paymentType})`}</Text>
           </Text>
         </View>
         <View style={styles.orderBottomRow}>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "15%"}}>
             <Text style={styles.orderText}>Delivered To:</Text>
             <Text style={styles.detailText}>{deliveredTo}</Text>
           </View>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "35%"}}>
             <Text style={styles.orderText}>Delivery Address:</Text>
             <Text style={styles.detailText}>{deliveryAddress}</Text>
           </View>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "12%"}}>
             <Text style={styles.orderText}>Ordered On:</Text>
             <Text style={styles.detailText}>{orderedOn}</Text>
           </View>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "12%"}}>
             <Text style={styles.orderText}>
               {status === "inprogress" 
                 ? "Expected Delivery:" 
@@ -168,14 +168,14 @@ const OrderCard: React.FC<OrderCardProps> = ({
                   : deliveredOn}
             </Text>
           </View>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "10%"}}>
             <Text
-              style={[styles.statusText, { backgroundColor: getStatusColor() }]}
+              style={{... styles.statusText,  marginLeft: 20, color: getStatusColor(),  }}
             >
               {getStatusText()}
             </Text>
           </View>
-          <View style={styles.detailColumn}>
+          <View style={{...styles.detailColumn, width: "10%", marginLeft: 75 }}>
             <TouchableOpacity 
               style={styles.rateButton}
               onPress={handleRatePress}
@@ -277,55 +277,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "40%",
+    height: "30%",
     width: "100%",
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 50,
-    marginBottom: 5,
-    // marginLeft: 10,
-    // marginRight: 10,
+    marginBottom: 10,
   },
   orderText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   orderBottomRow: {
     height: "65%",
     width: "100%",
-    // backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 5,
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
   },
   detailColumn: {
-    width: "17%",
     height: "100%",
     justifyContent: "center",
-    alignItems: "center",
   },
   detailText: {
-    fontSize: 16,
-    // textAlign: "center",
+    fontSize: 14,
     marginTop: 2,
   },
   statusText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "white",
-    width: "50%",
-    textAlign: "center",
-    textAlignVertical: "center",
-    borderRadius: 5,
-    paddingVertical: 8,
-  },
-  separatorLine: {
-    height: 1,
-    backgroundColor: "#ddd",
-    marginVertical: 10,
-    width: "100%",
   },
   rateButton: {
     backgroundColor: "#007bff",
@@ -334,12 +309,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    width: "50%",
   },
   rateButtonText: {
     color: "white",
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "600",
   },
   modalOverlay: {
     flex: 1,

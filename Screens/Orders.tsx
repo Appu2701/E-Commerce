@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { OrdersScreenNavigationProp } from "../types/navigation";
 import PageHeading from "../Components/PageHeading";
 import OrderCard from "../Components/OrderCard";
+import Footer from "../Components/Footer";
 import { FontAwesome } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 
@@ -89,8 +90,8 @@ const Orders = () => {
             showsVerticalScrollIndicator={false}
           >
             {/* Profile Content Goes Here */}
-            <View style={webStyles.profileHeaderCard}>
-              <Text style={webStyles.profileText}>My Orders</Text>
+            <View style={webStyles.screenHeaderCard}>
+              <Text style={webStyles.screenHeaderText}>My Orders</Text>
               <View style={webStyles.separatorLine}></View>
 
               {/* Single Row Layout */}
@@ -184,13 +185,13 @@ const Orders = () => {
                       console.log(itemValue);
                     }}
                   >
-                    <Picker.Item label="Default" value="all" />
-                    <Picker.Item label="A-Z" value="sortAZ" />
-                    <Picker.Item label="Z-A" value="sortZA" />
-                    <Picker.Item label="Newest First" value="sortNewest" />
-                    <Picker.Item label="Oldest First" value="sortOldest" />
-                    <Picker.Item label="Price: Low to High" value="priceLowHigh" />
-                    <Picker.Item label="Price: High to Low" value="priceHighLow" />
+                    <Picker.Item label="Default" value="all" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="A-Z" value="sortAZ" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="Z-A" value="sortZA" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="Newest First" value="sortNewest" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="Oldest First" value="sortOldest" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="Price: Low to High" value="priceLowHigh" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item label="Price: High to Low" value="priceHighLow" style={{ color: "#000", fontSize: 16 }} />
                   </Picker>
                 </View>
               </View>
@@ -292,6 +293,8 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
+
+            <Footer />
           </ScrollView>
         </View>
       )}
@@ -322,12 +325,12 @@ const webStyles = StyleSheet.create({
     overflow: "hidden",
     padding: 5,
   },
-  profileHeaderCard: {
+  screenHeaderCard: {
     backgroundColor: "#fff",
     padding: 5,
     borderRadius: 10,
   },
-  profileText: {
+  screenHeaderText: {
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
@@ -429,42 +432,39 @@ const webStyles = StyleSheet.create({
   centerSearchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#fff",
     borderRadius: 8,
     paddingHorizontal: 5,
     paddingVertical: 4,
     borderWidth: 1,
-    borderColor: "#e9ecef",
+    borderColor: "#8b8c8dff",
     flex: 1,
-    // justifyContent: "center",
   },
   searchInput: {
     flex: 1,
-    fontSize: 14,
-    color: "#333",
+    fontSize: 16,
+    color: "#000",
     marginLeft: 8,
-    // textAlign: "center",
-    // paddingHorizontal: 10,
     paddingVertical: 10,
   },
   rightDropdownContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: 5,
     justifyContent: "flex-end",
     width: "19%",
   },
   dropdownLabel: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "600",
-    color: "#333",
+    color: "#000",
   },
   dropdown: {
     height: 40,
     width: 160,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#fff",
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#e9ecef",
+    borderColor: "#8b8c8dff",
   },
 });

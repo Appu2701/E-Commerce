@@ -90,8 +90,8 @@ const MyAddress = () => {
             showsVerticalScrollIndicator={false}
           >
             {/* Profile Content Goes Here */}
-            <View style={webStyles.profileHeaderCard}>
-              <Text style={webStyles.profileText}>My Addresses</Text>
+            <View style={webStyles.screenHeaderCard}>
+              <Text style={webStyles.screenHeaderText}>My Addresses</Text>
               <View style={webStyles.separatorLine}></View>
               
             </View>
@@ -198,13 +198,13 @@ const webStyles = StyleSheet.create({
     overflow: "hidden",
     padding: 5,
   },
-  profileHeaderCard: {
+  screenHeaderCard: {
     backgroundColor: "#fff",
     padding: 5,
     borderRadius: 10,
     marginBottom: 10,
   },
-  profileText: {
+  screenHeaderText: {
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",

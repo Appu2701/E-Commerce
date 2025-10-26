@@ -13,6 +13,7 @@ import { ProfileScreenNavigationProp } from "../types/navigation";
 import { useUser } from "../context/UserContext";
 import { useEffect } from "react";
 import PageHeading from "../Components/PageHeading";
+import Footer from "../Components/Footer";
 import OrderCard from "../Components/OrderCard";
 import AddressCard from "../Components/AddressCard";
 import PaymentCard from "../Components/PaymentCard";
@@ -66,8 +67,8 @@ const Profile = () => {
             showsVerticalScrollIndicator={false}
           >
             {/* Profile Content Goes Here */}
-            <View style={webStyles.profileHeaderCard}>
-              <Text style={webStyles.profileText}>Profile</Text>
+            <View style={webStyles.screenHeaderCard}>
+              <Text style={webStyles.screenHeaderText}>Profile</Text>
             </View>
 
             {/* Personal Information Section */}
@@ -235,6 +236,8 @@ const Profile = () => {
             >
               <Text style={webStyles.logoutButtonText}>Log Out</Text>
             </TouchableOpacity>
+
+            <Footer />
           </ScrollView>
         </View>
       )}
@@ -265,13 +268,13 @@ const webStyles = StyleSheet.create({
     overflow: "hidden",
     padding: 5,
   },
-  profileHeaderCard: {
+  screenHeaderCard: {
     alignItems: "center",
     backgroundColor: "#fff",
     padding: 5,
     borderRadius: 10,
   },
-  profileText: {
+  screenHeaderText: {
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
