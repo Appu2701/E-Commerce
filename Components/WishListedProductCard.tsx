@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
-interface WishListCardProps {
+interface WishListedProductCardProps {
   onCardClick?: () => void;
   imageSource: ImageSourcePropType;
   productName: string;
@@ -25,7 +25,7 @@ interface WishListCardProps {
   onBuyNow?: () => void;
 }
 
-const WishListCard: React.FC<WishListCardProps> = ({
+const WishListedProductCard: React.FC<WishListedProductCardProps> = ({
   onCardClick,
   imageSource,
   productName,
@@ -259,4 +259,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WishListCard;
+export default WishListedProductCard;
