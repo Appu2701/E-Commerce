@@ -49,11 +49,13 @@ const PopularStore = () => {
           rating="4.5"
           ratingCount="100+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={true}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 1")}
           onCardPress={() => console.log("Store 1 pressed")}
           onViewMorePress={() => console.log("View more for Store 1")}
         />
@@ -63,11 +65,13 @@ const PopularStore = () => {
           rating="4.0"
           ratingCount="80+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={false}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 2")}
           onCardPress={() => console.log("Store 2 pressed")}
           onViewMorePress={() => console.log("View more for Store 2")}
         />
@@ -77,11 +81,13 @@ const PopularStore = () => {
           rating="4.2"
           ratingCount="90+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={false}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 3")}
           onCardPress={() => console.log("Store 3 pressed")}
           onViewMorePress={() => console.log("View more for Store 3")}
         />
@@ -91,11 +97,13 @@ const PopularStore = () => {
           rating="4.3"
           ratingCount="95+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={true}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 4")}
           onCardPress={() => console.log("Store 4 pressed")}
           onViewMorePress={() => console.log("View more for Store 4")}
         />
@@ -105,11 +113,13 @@ const PopularStore = () => {
           rating="4.6"
           ratingCount="110+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={true}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 5")}
           onCardPress={() => console.log("Store 5 pressed")}
           onViewMorePress={() => console.log("View more for Store 5")}
         />
@@ -119,12 +129,14 @@ const PopularStore = () => {
           rating="4.5"
           ratingCount="100+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
           onCardPress={() => console.log("Store 1 pressed")}
+          isWishlisted={true}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 1")}
           onViewMorePress={() => console.log("View more for Store 1")}
         />
         <StoreCard
@@ -133,11 +145,13 @@ const PopularStore = () => {
           rating="4.2"
           ratingCount="90+ ratings"
           categories={[
-            { name: "Electronics", color: "red" },
-            { name: "Fashion", color: "blue" },
-            { name: "Home", color: "green" },
-            { name: "Beauty", color: "yellow" },
+            { name: "Electronics", bgColor: "red" },
+            { name: "Fashion", bgColor: "blue" },
+            { name: "Home", bgColor: "green" },
+            { name: "Beauty", bgColor: "yellow", color: "#000" },
           ]}
+          isWishlisted={false}
+          onWishlistPress={() => console.log("Wishlist toggled for Store 3")}
           onCardPress={() => console.log("Store 3 pressed")}
           onViewMorePress={() => console.log("View more for Store 3")}
         />
@@ -163,7 +177,7 @@ const webStyles = StyleSheet.create({
   section: {
     width: "100%",
     alignItems: "center",
-    height: 450,
+    height: 430,
     backgroundColor: "#fff",
     marginTop: 10,
     borderTopLeftRadius: 10,

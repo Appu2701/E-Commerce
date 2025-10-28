@@ -56,6 +56,11 @@ const TrendingProduct = () => {
             originalPrice="$99.99"
             discountedPrice="$49.99"
             timer="03:00"
+            rating="4.5"
+            reviewCount="100"
+            isWishlisted={true}
+            isInCart={true}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 1")}
             onAddToCart={() => console.log("Add to cart - Product 1")}
             onBuyNow={() => console.log("Buy now - Product 1")}
             onCardPress={() => console.log("Card pressed - Product 1")}
@@ -67,6 +72,11 @@ const TrendingProduct = () => {
             originalPrice="$79.99"
             discountedPrice="$55.99"
             timer="02:30"
+            rating="4.0"
+            reviewCount="80"
+            isWishlisted={true}
+            isInCart={true}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 2")}
             onAddToCart={() => console.log("Add to cart - Product 2")}
             onBuyNow={() => console.log("Buy now - Product 2")}
             onCardPress={() => console.log("Card pressed - Product 2")}
@@ -78,6 +88,11 @@ const TrendingProduct = () => {
             originalPrice="$59.99"
             discountedPrice="$47.99"
             timer="01:45"
+            rating="3.5"
+            reviewCount="50"
+            isWishlisted={false}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 3")}
             onAddToCart={() => console.log("Add to cart - Product 3")}
             onBuyNow={() => console.log("Buy now - Product 3")}
             onCardPress={() => console.log("Card pressed - Product 3")}
@@ -89,6 +104,11 @@ const TrendingProduct = () => {
             originalPrice="$59.99"
             discountedPrice="$35.99"
             timer="02:45"
+            rating="4.0"
+            reviewCount="80"
+            isWishlisted={true}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 4")}
             onAddToCart={() => console.log("Add to cart - Product 4")}
             onBuyNow={() => console.log("Buy now - Product 4")}
             onCardPress={() => console.log("Card pressed - Product 4")}
@@ -100,6 +120,11 @@ const TrendingProduct = () => {
             originalPrice="$89.99"
             discountedPrice="$67.49"
             timer="01:30"
+            rating="4.0"
+            reviewCount="70"
+            isWishlisted={false}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 5")}
             onAddToCart={() => console.log("Add to cart - Product 5")}
             onBuyNow={() => console.log("Buy now - Product 5")}
             onCardPress={() => console.log("Card pressed - Product 5")}
@@ -111,6 +136,11 @@ const TrendingProduct = () => {
             originalPrice="$49.99"
             discountedPrice="$42.49"
             timer="00:50"
+            rating="4.0"
+            reviewCount="70"
+            isWishlisted={false}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 6")}
             onAddToCart={() => console.log("Add to cart - Product 6")}
             onBuyNow={() => console.log("Buy now - Product 6")}
             onCardPress={() => console.log("Card pressed - Product 6")}
@@ -122,6 +152,11 @@ const TrendingProduct = () => {
             originalPrice="$69.99"
             discountedPrice="$45.49"
             timer="02:15"
+            rating="4.3"
+            reviewCount="85"
+            isWishlisted={false}
+            isInCart={true}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 7")}
             onAddToCart={() => console.log("Add to cart - Product 7")}
             onBuyNow={() => console.log("Buy now - Product 7")}
             onCardPress={() => console.log("Card pressed - Product 7")}
@@ -133,6 +168,11 @@ const TrendingProduct = () => {
             originalPrice="$109.99"
             discountedPrice="$60.49"
             timer="03:30"
+            rating="4.1"
+            reviewCount="75"
+            isWishlisted={true}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 8")}
             onAddToCart={() => console.log("Add to cart - Product 8")}
             onBuyNow={() => console.log("Buy now - Product 8")}
             onCardPress={() => console.log("Card pressed - Product 8")}
@@ -144,6 +184,11 @@ const TrendingProduct = () => {
             originalPrice="$119.99"
             discountedPrice="$53.99"
             timer="04:00"
+            rating="4.6"
+            reviewCount="90"
+            isWishlisted={false}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 9")}
             onAddToCart={() => console.log("Add to cart - Product 9")}
             onBuyNow={() => console.log("Buy now - Product 9")}
             onCardPress={() => console.log("Card pressed - Product 9")}
@@ -155,6 +200,11 @@ const TrendingProduct = () => {
             originalPrice="$129.99"
             discountedPrice="$51.99"
             timer="05:00"
+            rating="4.7"
+            reviewCount="95"
+            isWishlisted={false}
+            isInCart={false}
+            onAddToWishlist={() => console.log("Add to wishlist - Product 10")}
             onAddToCart={() => console.log("Add to cart - Product 10")}
             onBuyNow={() => console.log("Buy now - Product 10")}
             onCardPress={() => console.log("Card pressed - Product 10")}
@@ -182,7 +232,7 @@ const webStyles = StyleSheet.create({
   section: {
     width: "100%",
     alignItems: "center",
-    height: 400,
+    height: 420,
     backgroundColor: "#fff",
     marginTop: 10,
     borderTopLeftRadius: 10,

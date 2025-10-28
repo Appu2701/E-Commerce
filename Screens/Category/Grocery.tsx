@@ -8,8 +8,18 @@ import {
 } from "react-native";
 import PageHeading from "../../Components/PageHeading";
 import Footer from "../../Components/Footer";
+import CategoryHeaderSection from "../../Components/CategoryHeaderSection";
 
 const Grocery = () => {
+  // Array of category images
+  const categoryImages = [
+    require("../../assets/Groceries1.jpg"),
+    require("../../assets/Groceries2.jpg"),
+    require("../../assets/Groceries3.jpg"),
+    require("../../assets/Groceries4.jpg"),
+    require("../../assets/Groceries5.jpg"),
+    require("../../assets/Groceries6.jpg"),
+  ];
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
@@ -23,9 +33,12 @@ const Grocery = () => {
             style={webStyles.scrollView}
             showsVerticalScrollIndicator={false}
           >
-            <View style={webStyles.sectionHeaderCard}>
-              <Text style={webStyles.sectionHeaderText}>Grocery Store</Text>
-            </View>
+            <CategoryHeaderSection
+              title="Largest Grocery Store"
+              subtitle="Get everything you need under one roof. Fresh produce, daily essentials, and more! | Affordable prices guaranteed. | Fast delivery options available."
+              description="Explore our wide range of grocery products and enjoy seamless shopping experience. Fresh, high-quality groceries delivered fast — from everyday staples to seasonal produce and pantry essentials. Carefully sourced, affordably priced items with strict freshness checks and convenient packaging. Easy reordering, flexible delivery slots, and helpful offers make shopping simple and budget-friendly. Shop confidently for your weekly needs — fresh picks, great value, and fast doorstep delivery."
+              categoryImages={categoryImages}
+            />
             <Footer />
           </ScrollView>
         </View>
@@ -56,17 +69,6 @@ const webStyles = StyleSheet.create({
     height: screenHeight - 100, // Adjust 100 to your header height
     overflow: "hidden",
     padding: 5,
-  },
-  sectionHeaderCard: {
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 5,
-    borderRadius: 10,
-  },
-  sectionHeaderText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
   },
 });
 

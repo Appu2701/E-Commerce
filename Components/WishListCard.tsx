@@ -7,9 +7,10 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 interface WishListCardProps {
-    onCardClick?: () => void;
+  onCardClick?: () => void;
   imageSource: ImageSourcePropType;
   productName: string;
   originalPrice: string;
@@ -17,15 +18,15 @@ interface WishListCardProps {
   discountPercentage: string;
   timeLeft: string;
   rating: string;
-  ratingStars: string;
   reviewCount: string;
+  isInCart: boolean;
   onMoveToCart?: () => void;
   onRemove?: () => void;
   onBuyNow?: () => void;
 }
 
 const WishListCard: React.FC<WishListCardProps> = ({
-    onCardClick,
+  onCardClick,
   imageSource,
   productName,
   originalPrice,
@@ -33,12 +34,38 @@ const WishListCard: React.FC<WishListCardProps> = ({
   discountPercentage,
   timeLeft,
   rating,
-  ratingStars,
   reviewCount,
+  isInCart,
   onMoveToCart,
   onRemove,
   onBuyNow,
 }) => {
+  const getStarFills = (value: number) => {
+    const v = Math.max(0, Math.min(5, value));
+    const fills: number[] = [];
+    for (let i = 0; i < 5; i++) {
+      const remaining = v - i;
+      if (remaining >= 1) {
+        fills.push(1); // Full star
+      } else if (remaining > 0) {
+        fills.push(Math.round(remaining * 10) / 10); // Partial star rounded to 0.1
+      } else {
+        fills.push(0); // Empty star
+      }
+    }
+    return fills;
+  };
+
+  const getStarColor = (rating: number) => {
+    if (rating >= 4) return "#FFD700"; // gold for high ratings
+    if (rating >= 3) return "#FFA500"; // orange for medium-high
+    if (rating >= 2) return "#FFFF00"; // yellow for medium
+    return "#FF0000"; // red for low ratings
+  };
+
+  const ratingValue = parseFloat(rating);
+  const color = getStarColor(ratingValue);
+  const fills = getStarFills(isNaN(ratingValue) ? 0 : ratingValue);
   return (
     <TouchableOpacity style={styles.cardContainer} onPress={onCardClick}>
       <Image
@@ -46,60 +73,65 @@ const WishListCard: React.FC<WishListCardProps> = ({
         style={styles.productImage}
         resizeMode="contain"
       />
-      <Text style={styles.productName}>
-        {productName}
-      </Text>
+      <Text style={styles.productName}>{productName}</Text>
       <View style={styles.priceDiscountRow}>
         <View style={styles.priceContainer}>
-          <Text style={styles.originalPrice}>
-            {originalPrice}
-          </Text>
-          <Text style={styles.discountedPrice}>
-            {discountedPrice}
-          </Text>
+          <Text style={styles.originalPrice}>{originalPrice}</Text>
+          <Text style={styles.discountedPrice}>{discountedPrice}</Text>
         </View>
         <View>
-          <Text style={styles.discountText}>
-            {discountPercentage}
-          </Text>
-          <Text style={styles.timeLeftText}>
-            {timeLeft}
-          </Text>
+          <Text style={styles.discountText}>{discountPercentage}</Text>
+          <Text style={styles.timeLeftText}>{timeLeft}</Text>
         </View>
       </View>
-      <View>
-        <View style={styles.ratingContainer}>
-          <Text style={styles.ratingStars}>
-            {ratingStars}
-          </Text>
-          <Text style={styles.ratingText}>
-            ({rating}) {reviewCount} reviews
-          </Text>
+      <View style={styles.ratingContainer}>
+        <View style={styles.ratingStars}>
+          {fills.map((fill, i) => (
+            <View key={i} style={styles.starWrapper}>
+              <FontAwesome
+                name="star-o"
+                size={16}
+                color="#ccc"
+                style={styles.emptyStar}
+              />
+              <View
+                style={[
+                  styles.filledStarOverlay,
+                  { width: Math.round(fill * 16) },
+                ]}
+              >
+                <FontAwesome name="star" size={16} color={color} />
+              </View>
+            </View>
+          ))}
         </View>
+        <Text style={styles.ratingText}>
+          ({ratingValue.toFixed(1)}) {reviewCount} reviews
+        </Text>
       </View>
       <View style={styles.actionButtonsRow}>
+        {isInCart ? (
+          <TouchableOpacity style={styles.inCartButton} onPress={onMoveToCart}>
+            <FontAwesome name="check" size={18} color="#fff" />
+            <Text style={styles.actionButtonText}>In Cart</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={{ ...styles.actionButton, backgroundColor: "#0572dfff" }}
+            onPress={onMoveToCart}
+          >
+            <Text style={styles.actionButtonText}>Move to Cart</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
-          style={[styles.actionButton, styles.moveToCartButton]}
-          onPress={onMoveToCart}
-        >
-          <Text style={styles.actionButtonText}>
-            Move To Cart
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.actionButton, styles.removeButton]}
+          style={{ ...styles.actionButton, backgroundColor: "#dc3545" }}
           onPress={onRemove}
         >
-          <Text style={styles.actionButtonText}>
-            Remove
-          </Text>
+          <Text style={styles.actionButtonText}>Remove</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.buyNowButton}
-        onPress={onBuyNow}
-      >
-        <Text style={styles.buyNowText}>
+      <TouchableOpacity style={styles.buyNowButton} onPress={onBuyNow}>
+        <Text style={{ ...styles.actionButtonText, fontSize: 16 }}>
           Buy Now
         </Text>
       </TouchableOpacity>
@@ -115,11 +147,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 10,
     width: "19.5%",
-    height: 350,
+    height: 325,
     alignItems: "center",
   },
   productImage: {
-    width: 250,
+    width: "100%",
     height: 150,
   },
   productName: {
@@ -127,18 +159,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   priceDiscountRow: {
+    padding: 5,
+    width: "100%",
+    height: 35,
     flexDirection: "row",
-    marginTop: 5,
     alignItems: "center",
-    gap: 40,
     justifyContent: "space-between",
   },
   priceContainer: {
     alignItems: "center",
     gap: 5,
     flexDirection: "row",
-    justifyContent: "center",
-    marginRight: 20,
   },
   originalPrice: {
     fontSize: 14,
@@ -146,7 +177,6 @@ const styles = StyleSheet.create({
     color: "#888",
   },
   discountedPrice: {
-    fontSize: 16,
     fontWeight: "600",
     color: "#000",
   },
@@ -160,55 +190,72 @@ const styles = StyleSheet.create({
     color: "#ef4121ff",
   },
   ratingContainer: {
+    width: "100%",
+    justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
   },
   ratingStars: {
-    fontSize: 16,
-    color: "#FFD700",
-    marginRight: 5,
+    flexDirection: "row",
+    alignItems: "center",
   },
   ratingText: {
     fontSize: 14,
     color: "#666",
   },
+  starWrapper: {
+    width: 16,
+    height: 16,
+    marginRight: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyStar: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+  },
+  filledStarOverlay: {
+    height: 16,
+    overflow: "hidden",
+    position: "absolute",
+    left: 0,
+    top: 0,
+  },
   actionButtonsRow: {
     flexDirection: "row",
     gap: 10,
-    marginTop: 5,
+    marginTop: 10,
     width: "100%",
-    paddingHorizontal: 5,
   },
   actionButton: {
-    padding: 10,
+    padding: 5,
     borderRadius: 5,
     alignItems: "center",
     flex: 1,
-  },
-  moveToCartButton: {
-    backgroundColor: "#007BFF",
-  },
-  removeButton: {
-    backgroundColor: "#dc3545",
   },
   actionButtonText: {
     color: "#fff",
     fontWeight: "bold",
   },
+  inCartButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+    padding: 5,
+    borderRadius: 5,
+    flex: 1,
+    backgroundColor: "#72A0FF",
+  },
   buyNowButton: {
     marginTop: 5,
     backgroundColor: "#28a745",
-    padding: 10,
+    padding: 5,
     borderRadius: 5,
     alignItems: "center",
     width: "100%",
-    paddingHorizontal: 5,
-  },
-  buyNowText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
   },
 });
 

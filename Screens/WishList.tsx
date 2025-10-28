@@ -38,8 +38,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -53,8 +53,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={true}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -68,8 +68,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={true}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -83,8 +83,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -97,8 +97,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -111,8 +111,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -125,8 +125,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="1d 2h 15m time left"
               rating="4.8"
-              ratingStars="★★★★★"
               reviewCount="89"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -139,8 +139,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -153,8 +153,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -167,8 +167,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -181,8 +181,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="2d 5h 30m time left"
               rating="4.5"
-              ratingStars="★★★★☆"
               reviewCount="123"
+              isInCart={false}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
@@ -195,8 +195,8 @@ const WishList = () => {
               discountPercentage="20% OFF"
               timeLeft="1d 2h 15m time left"
               rating="4.8"
-              ratingStars="★★★★★"
               reviewCount="89"
+              isInCart={true}
               onMoveToCart={() => console.log("Move to cart clicked")}
               onRemove={() => console.log("Remove clicked")}
               onBuyNow={() => console.log("Buy now clicked")}
