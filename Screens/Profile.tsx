@@ -32,7 +32,6 @@ const Profile = () => {
 
   const handleEdit = () => {
     console.log("Edit Clicked");
-    // navigation.navigate("EditProfile"); // Navigate to EditProfile screen
   };
 
   const handleOrders = () => {
@@ -47,7 +46,6 @@ const Profile = () => {
 
   const handlePayment = () => {
     console.log("Payment Clicked");
-    // navigation.navigate("PaymentMethods"); // Navigate to PaymentMethods screen
   };
 
   useEffect(() => {
@@ -58,7 +56,9 @@ const Profile = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <View style={mobStyles.container}></View>
+        <View style={mobStyles.container}>
+          <Text>Mobile Cart - Coming Soon</Text>
+        </View>
       ) : (
         <View style={webStyles.container}>
           <PageHeading />
@@ -79,9 +79,9 @@ const Profile = () => {
                 </Text>
                 <TouchableOpacity
                   onPress={handleEdit}
-                  style={webStyles.editButton}
+                  style={webStyles.actionButton}
                 >
-                  <Text style={webStyles.editButtonText}>Edit</Text>
+                  <Text style={webStyles.actionButtonText}>Edit</Text>
                 </TouchableOpacity>
               </View>
               <View style={webStyles.profileInfoRow}>
@@ -113,9 +113,9 @@ const Profile = () => {
                 <Text style={webStyles.cardTitleNoBorder}>My Orders</Text>
                 <TouchableOpacity
                   onPress={handleOrders}
-                  style={webStyles.editButton}
+                  style={webStyles.actionButton}
                 >
-                  <Text style={webStyles.editButtonText}>View All</Text>
+                  <Text style={webStyles.actionButtonText}>View All</Text>
                 </TouchableOpacity>
               </View>
               <OrderCard
@@ -139,9 +139,9 @@ const Profile = () => {
                 <Text style={webStyles.cardTitleNoBorder}>My Address</Text>
                 <TouchableOpacity
                   onPress={handleAddress}
-                  style={webStyles.editButton}
+                  style={webStyles.actionButton}
                 >
-                  <Text style={webStyles.editButtonText}>View All</Text>
+                  <Text style={webStyles.actionButtonText}>View All</Text>
                 </TouchableOpacity>
               </View>
               <AddressCard
@@ -166,9 +166,9 @@ const Profile = () => {
                 </Text>
                 <TouchableOpacity
                   onPress={handlePayment}
-                  style={webStyles.editButton}
+                  style={webStyles.actionButton}
                 >
-                  <Text style={webStyles.editButtonText}>Add New</Text>
+                  <Text style={webStyles.actionButtonText}>Add New</Text>
                 </TouchableOpacity>
               </View>
               <ScrollView
@@ -250,6 +250,8 @@ export default Profile;
 const mobStyles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -264,7 +266,7 @@ const webStyles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: "#ddd",
-    height: screenHeight - 100, // Adjust 100 to your header height
+    height: screenHeight - 100,
     overflow: "hidden",
     padding: 5,
   },
@@ -299,7 +301,7 @@ const webStyles = StyleSheet.create({
     fontWeight: "bold",
     borderBottomWidth: 0,
   },
-  editButton: {
+  actionButton: {
     width: 100,
     height: 40,
     backgroundColor: "#684dffff",
@@ -308,7 +310,7 @@ const webStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  editButtonText: {
+  actionButtonText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
@@ -336,73 +338,6 @@ const webStyles = StyleSheet.create({
     marginTop: 10,
     borderWidth: 1,
     borderColor: "#000",
-  },
-
-  ordersContainer: {
-    // backgroundColor: "#f0f0f0",
-    padding: 10,
-    borderRadius: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  orderImageContainer: {
-    width: "10%",
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  orderImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-  },
-  orderDetailsContainer: {
-    width: "88%",
-    height: 100,
-    flexDirection: "column",
-  },
-  orderTopRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "35%",
-    width: "100%",
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 5,
-  },
-  orderText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  orderBottomRow: {
-    height: "65%",
-    width: "100%",
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 5,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  },
-  statusText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    backgroundColor: "green",
-    color: "white",
-    width: "50%",
-    textAlign: "center",
-    textAlignVertical: "center",
-    borderRadius: 5,
-    paddingVertical: 8,
-  },
-  separatorLine: {
-    height: 1,
-    backgroundColor: "#ddd",
-    marginVertical: 10,
-    width: "100%",
   },
   logoutButton: {
     marginTop: 20,

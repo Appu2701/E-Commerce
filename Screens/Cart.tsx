@@ -15,32 +15,38 @@ import Footer from "../Components/Footer";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
     {
-      id: 'p1',
-      productName: 'Wireless Bluetooth Headphones',
-      productBrand: 'AudioTech',
-      productCategory: 'Electronics',
+      id: "p1",
+      productName: "Wireless Bluetooth Headphones",
+      productBrand: "AudioTech",
+      productCategory: "Electronics",
       price: 10,
       quantity: 1,
-      productImage: require('../assets/img2.jpg'),
+      productImage: require("../assets/img2.jpg"),
     },
     {
-      id: 'p2',
-      productName: 'Wireless Bluetooth Headphones',
-      productBrand: 'AudioTech',
-      productCategory: 'Audio',
+      id: "p2",
+      productName: "Wireless Bluetooth Headphones",
+      productBrand: "AudioTech",
+      productCategory: "Audio",
       price: 10,
       quantity: 1,
-      productImage: require('../assets/img2.jpg'),
+      productImage: require("../assets/img2.jpg"),
     },
   ]);
 
   const handleQuantityIncrease = (id: string) => {
-    setCartItems(prev => prev.map(it => (it.id === id ? { ...it, quantity: it.quantity + 1 } : it)));
+    setCartItems((prev) =>
+      prev.map((it) =>
+        it.id === id ? { ...it, quantity: it.quantity + 1 } : it
+      )
+    );
   };
 
   const handleQuantityDecrease = (id: string) => {
-    setCartItems(prev =>
-      prev.map(it => (it.id === id ? { ...it, quantity: Math.max(1, it.quantity - 1) } : it))
+    setCartItems((prev) =>
+      prev.map((it) =>
+        it.id === id ? { ...it, quantity: Math.max(1, it.quantity - 1) } : it
+      )
     );
   };
 
@@ -56,9 +62,12 @@ const Cart = () => {
     console.log("Buy Now clicked");
   };
   // derived totals
-  const subtotal = cartItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  const subtotal = cartItems.reduce(
+    (sum, it) => sum + it.price * it.quantity,
+    0
+  );
   const productCount = cartItems.reduce((sum, it) => sum + it.quantity, 0);
-  const categoryCount = new Set(cartItems.map(it => it.productCategory)).size;
+  const categoryCount = new Set(cartItems.map((it) => it.productCategory)).size;
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
@@ -75,7 +84,7 @@ const Cart = () => {
             <View style={webStyles.sectionHeaderCard}>
               <Text style={webStyles.sectionHeaderText}>My Cart</Text>
             </View>
-            
+
             {cartItems.map((item) => (
               <CartProductCard
                 key={item.id}
@@ -101,34 +110,48 @@ const Cart = () => {
             <View style={webStyles.totalCard}>
               <Text style={webStyles.totalTitle}>Order Summary</Text>
               <View style={webStyles.totalsRow}>
-                <Text style={webStyles.totalLabel}>Items</Text>
-                <Text style={webStyles.totalValue}>{productCount}</Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>Items</Text>
+                <Text style={{ fontSize: 16, color: "#333" }}>
+                  {productCount}
+                </Text>
               </View>
               <View style={webStyles.totalsRow}>
-                <Text style={webStyles.totalLabel}>Categories</Text>
-                <Text style={webStyles.totalValue}>{categoryCount}</Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>Categories</Text>
+                <Text style={{ fontSize: 16, color: "#333" }}>
+                  {categoryCount}
+                </Text>
               </View>
               <View style={webStyles.totalsRow}>
-                <Text style={webStyles.totalLabel}>Subtotal</Text>
-                <Text style={webStyles.totalValue}>{`$${subtotal.toFixed(2)}`}</Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>Subtotal</Text>
+                <Text
+                  style={{ fontSize: 16, color: "#333" }}
+                >{`$${subtotal.toFixed(2)}`}</Text>
               </View>
               <View style={webStyles.totalsRow}>
-                <Text style={webStyles.totalLabel}>Tax</Text>
-                <Text style={webStyles.totalValue}>$0.00</Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>Tax</Text>
+                <Text style={{ fontSize: 16, color: "#333" }}>$0.00</Text>
               </View>
               <View style={webStyles.totalsRow}>
-                <Text style={webStyles.totalLabel}>Shipping</Text>
-                <Text style={webStyles.totalValue}>$0.00</Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>Shipping</Text>
+                <Text style={{ fontSize: 16, color: "#333" }}>$0.00</Text>
               </View>
-              <View style={[webStyles.totalsRow, webStyles.orderTotalRow]}>
-                <Text style={[webStyles.totalLabel, { fontWeight: 'bold' }]}>Total</Text>
-                <Text style={[webStyles.totalValue, { fontWeight: 'bold', color: '#007bff' }]}>{`$${subtotal.toFixed(2)}`}</Text>
+              <View style={webStyles.orderTotalRow}>
+                <Text style={{ fontSize: 18, fontWeight: "700" }}>Total</Text>
+                <Text style={webStyles.orderTotalValue}>{`$${subtotal.toFixed(
+                  2
+                )}`}</Text>
               </View>
-              <View style={webStyles.totalButtonsRow}>
-                <TouchableOpacity onPress={handleBuyNow} style={[webStyles.actionButton, webStyles.actionPrimary]}>
+              <View style={{ flexDirection: "row", marginTop: 12 }}>
+                <TouchableOpacity
+                  onPress={handleBuyNow}
+                  style={webStyles.buyAllButton}
+                >
                   <Text style={webStyles.actionButtonText}>Buy All</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleRemoveFromCart} style={[webStyles.actionButton, webStyles.actionSecondary]}>
+                <TouchableOpacity
+                  onPress={handleRemoveFromCart}
+                  style={webStyles.removeAllButton}
+                >
                   <Text style={webStyles.actionButtonText}>Remove All</Text>
                 </TouchableOpacity>
               </View>
@@ -165,7 +188,7 @@ const webStyles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: "#ddd",
-    height: screenHeight - 100, // Adjust 100 to your header height
+    height: screenHeight - 100,
     overflow: "hidden",
     padding: 5,
   },
@@ -180,61 +203,59 @@ const webStyles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  // Order summary / total card
   totalCard: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
   },
   totalTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 8,
   },
   totalsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 6,
   },
   orderTotalRow: {
     borderTopWidth: 1,
-    borderTopColor: '#eee',
+    borderTopColor: "#eee",
     marginTop: 6,
     paddingTop: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 6,
   },
-  totalLabel: {
-    fontSize: 14,
-    color: '#666',
+  orderTotalValue: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#007bff",
   },
-  totalValue: {
-    fontSize: 16,
-    color: '#333',
-  },
-  // new full-width action buttons
-  totalButtonsRow: {
-    flexDirection: 'row',
-    marginTop: 12,
-  },
-  actionButton: {
+  buyAllButton: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  actionPrimary: {
-    backgroundColor: '#007bff',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#007bff",
     marginRight: 8,
   },
-  actionSecondary: {
-    backgroundColor: '#dc3545',
-  },
   actionButtonText: {
-    color: '#fff',
-    fontWeight: '600',
+    color: "#fff",
+    fontWeight: "600",
     fontSize: 16,
+  },
+  removeAllButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 6,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#dc3545",
   },
 });
 

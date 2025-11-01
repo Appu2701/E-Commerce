@@ -341,7 +341,7 @@ const webStyles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: "#ddd",
-    height: screenHeight - 100, // Adjust 100 to your header height
+    height: screenHeight - 100,
     overflow: "hidden",
     padding: 5,
   },
@@ -400,7 +400,6 @@ const webStyles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 8,
     marginBottom: 5,
-    // justifyContent: "space-evenly"
   },
 });
 

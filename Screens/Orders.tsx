@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -81,7 +81,9 @@ const Orders = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <View style={mobStyles.container}></View>
+        <View style={mobStyles.container}>
+          <Text>Mobile Cart - Coming Soon</Text>
+        </View>
       ) : (
         <View style={webStyles.container}>
           <PageHeading />
@@ -100,12 +102,15 @@ const Orders = () => {
                 <View style={webStyles.leftFilterContainer}>
                   <TouchableOpacity
                     onPress={() => handleFilterPress("all")}
-                    style={getStatusButtonStyle("all", selectedFilter === "all")}
+                    style={getStatusButtonStyle(
+                      "all",
+                      selectedFilter === "all"
+                    )}
                   >
                     <Text
                       style={[
                         webStyles.filterText,
-                        selectedFilter === "all" && webStyles.activeFilterText,
+                        selectedFilter === "all" && { color: "#fff" },
                       ]}
                     >
                       ALL
@@ -113,12 +118,15 @@ const Orders = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => handleFilterPress("delivered")}
-                    style={getStatusButtonStyle("delivered", selectedFilter === "delivered")}
+                    style={getStatusButtonStyle(
+                      "delivered",
+                      selectedFilter === "delivered"
+                    )}
                   >
                     <Text
                       style={[
                         webStyles.filterText,
-                        selectedFilter === "delivered" && webStyles.activeFilterText,
+                        selectedFilter === "delivered" && { color: "#fff" },
                       ]}
                     >
                       Delivered
@@ -126,12 +134,15 @@ const Orders = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => handleFilterPress("inprogress")}
-                    style={getStatusButtonStyle("inprogress", selectedFilter === "inprogress")}
+                    style={getStatusButtonStyle(
+                      "inprogress",
+                      selectedFilter === "inprogress"
+                    )}
                   >
                     <Text
                       style={[
                         webStyles.filterText,
-                        selectedFilter === "inprogress" && webStyles.activeFilterText,
+                        selectedFilter === "inprogress" && { color: "#fff" },
                       ]}
                     >
                       In Progress
@@ -139,12 +150,15 @@ const Orders = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => handleFilterPress("cancelled")}
-                    style={getStatusButtonStyle("cancelled", selectedFilter === "cancelled")}
+                    style={getStatusButtonStyle(
+                      "cancelled",
+                      selectedFilter === "cancelled"
+                    )}
                   >
                     <Text
                       style={[
                         webStyles.filterText,
-                        selectedFilter === "cancelled" && webStyles.activeFilterText,
+                        selectedFilter === "cancelled" && { color: "#fff" },
                       ]}
                     >
                       Cancelled
@@ -152,12 +166,15 @@ const Orders = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => handleFilterPress("returned")}
-                    style={getStatusButtonStyle("returned", selectedFilter === "returned")}
+                    style={getStatusButtonStyle(
+                      "returned",
+                      selectedFilter === "returned"
+                    )}
                   >
                     <Text
                       style={[
                         webStyles.filterText,
-                        selectedFilter === "returned" && webStyles.activeFilterText,
+                        selectedFilter === "returned" && { color: "#fff" },
                       ]}
                     >
                       Returned
@@ -185,13 +202,41 @@ const Orders = () => {
                       console.log(itemValue);
                     }}
                   >
-                    <Picker.Item label="Default" value="all" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="A-Z" value="sortAZ" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="Z-A" value="sortZA" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="Newest First" value="sortNewest" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="Oldest First" value="sortOldest" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="Price: Low to High" value="priceLowHigh" style={{ color: "#000", fontSize: 16 }} />
-                    <Picker.Item label="Price: High to Low" value="priceHighLow" style={{ color: "#000", fontSize: 16 }} />
+                    <Picker.Item
+                      label="Default"
+                      value="all"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="A-Z"
+                      value="sortAZ"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="Z-A"
+                      value="sortZA"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="Newest First"
+                      value="sortNewest"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="Oldest First"
+                      value="sortOldest"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="Price: Low to High"
+                      value="priceLowHigh"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
+                    <Picker.Item
+                      label="Price: High to Low"
+                      value="priceHighLow"
+                      style={{ color: "#000", fontSize: 16 }}
+                    />
                   </Picker>
                 </View>
               </View>
@@ -209,7 +254,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123457"
@@ -223,7 +267,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123458"
@@ -237,7 +280,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123459"
@@ -251,7 +293,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123460"
@@ -265,7 +306,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123461"
@@ -279,7 +319,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <OrderCard
               orderName="Sample Product"
               orderId="#123462"
@@ -293,7 +332,6 @@ const Orders = () => {
               imageSource={require("../assets/img3.jpg")}
               onPress={handleOrders}
             />
-
             <Footer />
           </ScrollView>
         </View>
@@ -307,6 +345,8 @@ export default Orders;
 const mobStyles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -321,7 +361,7 @@ const webStyles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: "#ddd",
-    height: screenHeight - 100, // Adjust 100 to your header height
+    height: screenHeight - 100,
     overflow: "hidden",
     padding: 5,
   },
@@ -341,80 +381,6 @@ const webStyles = StyleSheet.create({
     marginVertical: 3,
     width: "100%",
   },
-  centerContainer: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#ddd",
-    padding: 5,
-    borderRadius: 5,
-    flexDirection: "row",
-    gap: 10,
-    justifyContent: "center",
-  },
-  filterText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#000",
-    textAlign: "center",
-    textAlignVertical: "center",
-  },
-  statusFilterRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-    gap: 10,
-  },
-  statusFilterButton: {
-    padding: 8,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "transparent",
-  },
-  activeStatusFilter: {
-    backgroundColor: "#4CAF50",
-    borderColor: "#4CAF50",
-  },
-  activeFilterText: {
-    color: "#fff",
-  },
-  bottomControlsRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  sortFilterContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-  },
-  sortFilterButton: {
-    padding: 6,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    backgroundColor: "transparent",
-  },
-  activeSortFilter: {
-    backgroundColor: "#007bff",
-    borderColor: "#007bff",
-  },
-  sortFilterText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: "#000",
-    textAlign: "center",
-  },
-  activeSortFilterText: {
-    color: "#fff",
-  },
-  filterDropdownContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-  },
   singleRowContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -428,6 +394,13 @@ const webStyles = StyleSheet.create({
     gap: 8,
     justifyContent: "flex-start",
     width: "36%",
+  },
+  filterText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000",
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   centerSearchContainer: {
     flexDirection: "row",
