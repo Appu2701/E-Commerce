@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   ratingValue: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 3,
