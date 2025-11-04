@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Address: undefined;
   Cart: undefined;
   Wishlist: undefined;
+  Store: undefined;
   Grocery: undefined;
   Electronics: undefined;
   Sports: undefined;
@@ -19,7 +20,6 @@ export type RootStackParamList = {
   Furniture: undefined;
   Books: undefined;
   Toys: undefined;
-
 };
 
 export type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -40,3 +40,4 @@ export type MobilesScreenNavigationProp = StackNavigationProp<RootStackParamList
 export type FurnitureScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Furniture'>;
 export type BooksScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Books'>;
 export type ToysScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Toys'>;
+export type StoreScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Store'>;

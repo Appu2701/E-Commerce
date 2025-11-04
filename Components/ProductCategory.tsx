@@ -97,12 +97,13 @@ export default ProductCategory;
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: "#eee",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
     alignItems: "center",
+    paddingBottom: 5,
   },
   card: {
     backgroundColor: "#fff",

@@ -55,9 +55,9 @@ const webStyles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#ddd",
     height: screenHeight - 100, // Adjust 100 to your header height
     overflow: "hidden",
-    padding: 10,
+    padding: 5,
   }
 });

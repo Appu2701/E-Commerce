@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import PageHeading from "../Components/PageHeading";
 import AddressCard from "../Components/AddressCard";
+import Footer from "../Components/Footer";
 
 const MyAddress = () => {
   return (
@@ -101,6 +102,7 @@ const MyAddress = () => {
               addressType="work"
             />
             {/* Add more AddressCard components as needed */}
+            <Footer />
           </ScrollView>
         </View>
       )}

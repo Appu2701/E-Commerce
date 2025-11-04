@@ -22,6 +22,7 @@ import Furniture from './Screens/Category/Furniture';
 import Mobiles from './Screens/Category/Mobiles';
 import Fashion from './Screens/Category/Fashion';
 import Sports from './Screens/Category/Sports';
+import Store from './Screens/Store';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -40,6 +41,7 @@ export default function App() {
           <Stack.Screen name="Address" component={Address} />
           <Stack.Screen name="Cart" component={Cart} />
           <Stack.Screen name="Wishlist" component={WishList} />
+          <Stack.Screen name="Store" component={Store} />
           <Stack.Screen name="Grocery" component={Grocery} />
           <Stack.Screen name="Electronics" component={Electronics} />
           <Stack.Screen name="Sports" component={Sports} />
