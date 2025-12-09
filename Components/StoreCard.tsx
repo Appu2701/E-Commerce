@@ -14,8 +14,8 @@ interface Category {
 interface StoreCardProps {
   imageSource: any;
   storeName: string;
-  rating: string;
-  ratingCount: string;
+  rating: number;
+  ratingCount: number;
   categories: Category[];
   isWishlisted: boolean;
   onCardPress?: () => void;
@@ -59,7 +59,8 @@ const StoreCard: React.FC<StoreCardProps> = ({
     return "#FF0000"; // red for low ratings
   };
 
-  const ratingValue = parseFloat(rating);
+  // Safely convert rating to number
+  const ratingValue = typeof rating === 'number' ? rating : parseFloat(String(rating)) || 0;
   const color = getStarColor(ratingValue);
   const fills = getStarFills(isNaN(ratingValue) ? 0 : ratingValue);
 
@@ -99,7 +100,7 @@ const StoreCard: React.FC<StoreCardProps> = ({
             </Text>
           </View>
           <View style={styles.reviewsRow}>
-            <Text style={styles.reviewsText}>({ratingCount} reviews)</Text>
+            <Text style={styles.reviewsText}>({ratingCount}+ ratings)</Text>
           </View>
         </View>
       </View>
@@ -121,7 +122,7 @@ const StoreCard: React.FC<StoreCardProps> = ({
       </View>
       <View style={styles.actionRow}>
         <TouchableOpacity
-          style={ styles.wishlistButton }
+          style={styles.wishlistButton}
           onPress={onWishlistPress}
         >
           <FontAwesome
@@ -131,7 +132,7 @@ const StoreCard: React.FC<StoreCardProps> = ({
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={ styles.actionButton }
+          style={styles.actionButton}
           onPress={onViewMorePress}
         >
           <Text style={styles.viewMoreText}>View More</Text>
@@ -254,8 +255,8 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     alignItems: "center",
-     width: "70%",
-            backgroundColor: "#007AFF",
+    width: "70%",
+    backgroundColor: "#007AFF",
   },
   viewMoreText: {
     fontSize: 18,

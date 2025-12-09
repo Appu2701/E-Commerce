@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/navigation';
 interface ProductCardProps {
   imageSource: any;
   productName: string;
@@ -35,6 +38,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onCardPress,
 }) => {
 
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const getStarFills = (value: number) => {
     const v = Math.max(0, Math.min(5, value));
     const fills: number[] = [];
@@ -63,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const fills = getStarFills(isNaN(ratingValue) ? 0 : ratingValue);
   
   return (
-    <TouchableOpacity style={styles.sectionCard} onPress={onCardPress}>
+    <TouchableOpacity style={styles.sectionCard} onPress={() => navigation.navigate('Product')}>
       <Image
         source={imageSource}
         style={styles.productImage}

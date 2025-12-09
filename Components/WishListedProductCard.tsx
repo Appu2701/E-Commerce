@@ -8,6 +8,9 @@ import {
   ImageSourcePropType,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/navigation';
 
 interface WishListedProductCardProps {
   onCardClick?: () => void;
@@ -40,6 +43,8 @@ const WishListedProductCard: React.FC<WishListedProductCardProps> = ({
   onRemove,
   onBuyNow,
 }) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const getStarFills = (value: number) => {
     const v = Math.max(0, Math.min(5, value));
     const fills: number[] = [];
@@ -67,7 +72,7 @@ const WishListedProductCard: React.FC<WishListedProductCardProps> = ({
   const color = getStarColor(ratingValue);
   const fills = getStarFills(isNaN(ratingValue) ? 0 : ratingValue);
   return (
-    <TouchableOpacity style={styles.cardContainer} onPress={onCardClick}>
+    <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('Product')}>
       <Image
         source={imageSource}
         style={styles.productImage}

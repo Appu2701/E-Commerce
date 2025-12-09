@@ -1,232 +1,276 @@
-
 import { useState, useRef, useEffect } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-} from "react-native";  
-
+import { View, Text, ScrollView, StyleSheet, Animated } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import ProductCard from "../../Components/ProductCard";
-const PopularProduct = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-      const scrollViewRef = useRef<ScrollView>(null);
-      const totalCards = 10; // Updated to match actual number of cards
-      const cardWidth = 270; // Card width + margin (250 + 20)
-    
-      useEffect(() => {
-        const interval = setInterval(() => {
-          setCurrentIndex((prevIndex) => {
-            const nextIndex = (prevIndex + 1) % totalCards;
-            const scrollPosition = nextIndex * cardWidth;
-    
-            scrollViewRef.current?.scrollTo({
-              x: scrollPosition,
-              animated: true,
-            });
-    
-            return nextIndex;
-          });
-        }, 3000); // Auto-scroll every 3 seconds
-    
-        return () => clearInterval(interval);
-      }, []);
-  return (
-    <View style={webStyles.section}>
-        <Text style={webStyles.sectionTitle}>Popular Products</Text>
-        <ScrollView
-          ref={scrollViewRef}
-          contentContainerStyle={webStyles.sectionContent}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled={false}
-          decelerationRate="fast"
-          snapToInterval={cardWidth}
-          snapToAlignment="start"
-          onMomentumScrollEnd={(event) => {
-            const scrollPosition = event.nativeEvent.contentOffset.x;
-            const index = Math.round(scrollPosition / cardWidth);
-            setCurrentIndex(index % totalCards);
-          }}
-        >
-          <ProductCard
-            imageSource={require("../../assets/img1.jpg")}
-            productName="Product 1"
-            discount="50% Off"
-            originalPrice="$99.99"
-            discountedPrice="$49.99"
-            rating="4.5"
-            reviewCount="100"
-            timer="03:00"
-            isInCart={true}
-            isWishlisted={true}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 1")}
-            onAddToCart={() => console.log("Add to cart - Product 1")}
-            onBuyNow={() => console.log("Buy now - Product 1")}
-            onCardPress={() => console.log("Card pressed - Product 1")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img2.jpg")}
-            productName="Product 2"
-            discount="30% Off"
-            originalPrice="$79.99"
-            discountedPrice="$55.99"
-            rating="4.0"
-            reviewCount="80"
-            timer="02:30"
-            isInCart={true}
-            isWishlisted={true}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 2")}
-            onAddToCart={() => console.log("Add to cart - Product 2")}
-            onBuyNow={() => console.log("Buy now - Product 2")}
-            onCardPress={() => console.log("Card pressed - Product 2")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img3.jpg")}
-            productName="Product 3"
-            discount="20% Off"
-            originalPrice="$59.99"
-            discountedPrice="$47.99"
-            timer="01:45"
-            rating="3.5"
-            reviewCount="50"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 3")}
-            onAddToCart={() => console.log("Add to cart - Product 3")}
-            onBuyNow={() => console.log("Buy now - Product 3")}
-            onCardPress={() => console.log("Card pressed - Product 3")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img4.jpg")}
-            productName="Product 4"
-            discount="40% Off"
-            originalPrice="$59.99"
-            discountedPrice="$35.99"
-            timer="02:45"
-            rating="4.0"
-            reviewCount="80"
-            isInCart={false}
-            isWishlisted={true}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 4")}
-            onAddToCart={() => console.log("Add to cart - Product 4")}
-            onBuyNow={() => console.log("Buy now - Product 4")}
-            onCardPress={() => console.log("Card pressed - Product 4")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img5.jpg")}
-            productName="Product 5"
-            discount="25% Off"
-            originalPrice="$89.99"
-            discountedPrice="$67.49"
-            timer="01:30"
-            rating="4.2"
-            reviewCount="90"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 5")}
-            onAddToCart={() => console.log("Add to cart - Product 5")}
-            onBuyNow={() => console.log("Buy now - Product 5")}
-            onCardPress={() => console.log("Card pressed - Product 5")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img6.jpg")}
-            productName="Product 6"
-            discount="15% Off"
-            originalPrice="$49.99"
-            discountedPrice="$42.49"
-            timer="00:50"
-            rating="4.0"
-            reviewCount="70"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 6")}
-            onAddToCart={() => console.log("Add to cart - Product 6")}
-            onBuyNow={() => console.log("Buy now - Product 6")}
-            onCardPress={() => console.log("Card pressed - Product 6")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img7.jpg")}
-            productName="Product 7"
-            discount="35% Off"
-            originalPrice="$69.99"
-            discountedPrice="$45.49"
-            timer="02:15"
-            rating="4.3"
-            reviewCount="85"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 7")}
-            onAddToCart={() => console.log("Add to cart - Product 7")}
-            onBuyNow={() => console.log("Buy now - Product 7")}
-            onCardPress={() => console.log("Card pressed - Product 7")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img8.jpg")}
-            productName="Product 8"
-            discount="45% Off"
-            originalPrice="$109.99"
-            discountedPrice="$60.49"
-            timer="03:30"
-            rating="4.1"
-            reviewCount="75"
-            isInCart={false}
-            isWishlisted={true}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 8")}
-            onAddToCart={() => console.log("Add to cart - Product 8")}
-            onBuyNow={() => console.log("Buy now - Product 8")}
-            onCardPress={() => console.log("Card pressed - Product 8")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img9.jpg")}
-            productName="Product 9"
-            discount="55% Off"
-            originalPrice="$119.99"
-            discountedPrice="$53.99"
-            timer="04:00"
-            rating="4.6"
-            reviewCount="110"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 9")}
-            onAddToCart={() => console.log("Add to cart - Product 9")}
-            onBuyNow={() => console.log("Buy now - Product 9")}
-            onCardPress={() => console.log("Card pressed - Product 9")}
-          />
-          <ProductCard
-            imageSource={require("../../assets/img10.jpg")}
-            productName="Product 10"
-            discount="60% Off"
-            originalPrice="$129.99"
-            discountedPrice="$51.99"
-            timer="05:00"
-            rating="4.7"
-            reviewCount="120"
-            isInCart={false}
-            isWishlisted={false}
-            onAddToWishlist={() => console.log("Add to wishlist - Product 10")}
-            onAddToCart={() => console.log("Add to cart - Product 10")}
-            onBuyNow={() => console.log("Buy now - Product 10")}
-            onCardPress={() => console.log("Card pressed - Product 10")}
-          />
-          {/* Add more product cards as needed */}
-        </ScrollView>
-        <View style={webStyles.indicatorContainer}>
-          {Array.from({ length: totalCards }, (_, index) => (
-            <View
-              key={index}
-              style={[
-                webStyles.indicator,
-                currentIndex === index && webStyles.activeIndicator,
-              ]}
-            />
-          ))}
-        </View>
-      </View>
-  )
+import { NGROK_API } from "../../config/api";
+
+export interface PopularProduct {
+  dealId: number;
+  imageSource: any; // Can be require() statement or network URL
+  productName: string;
+  discount: string;
+  originalPrice: number;
+  discountedPrice: number;
+  rating: number;
+  reviewCount: number;
+  timer: string;
+  wishlisted: boolean;
+  inCart: boolean;
 }
 
-export default PopularProduct
+const PopularProduct = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [popularProducts, setPopularProducts] = useState<PopularProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const spinValue = useRef(new Animated.Value(0)).current;
+
+  // Loading dots animation
+  const dot1Opacity = useRef(new Animated.Value(0.3)).current;
+  const dot2Opacity = useRef(new Animated.Value(0.3)).current;
+  const dot3Opacity = useRef(new Animated.Value(0.3)).current;
+
+  const cardWidth = 260; // Card width + margin (250 + 10)
+  const totalCards = popularProducts.length;
+
+  // Helper function to convert base64 image data to URI
+  const convertBase64ToImageSource = (base64String: string | null | undefined) => {
+    // If value is null, undefined, or empty, return default image
+    if (!base64String || base64String.trim() === '') {
+      return require('../../assets/img1.jpg');
+    }
+
+    // Check if the string already has the data URI prefix
+    if (base64String.startsWith('data:image')) {
+      return { uri: base64String };
+    }
+
+    // If it's just the base64 code without prefix, add it
+    // Assuming JPEG format, adjust if your API uses different formats
+    const imagePrefix = 'data:image/jpeg;base64,';
+    return { uri: `${imagePrefix}${base64String}` };
+  };
+
+  // Loading animation effect for spinner
+  useEffect(() => {
+    if (isLoading) {
+      Animated.loop(
+        Animated.timing(spinValue, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        })
+      ).start();
+    } else {
+      spinValue.setValue(0);
+    }
+  }, [isLoading]);
+
+  // Loading dots animation effect
+  useEffect(() => {
+    if (isLoading) {
+      const createDotAnimation = (dotOpacity: Animated.Value, delay: number) => {
+        return Animated.sequence([
+          Animated.delay(delay),
+          Animated.timing(dotOpacity, {
+            toValue: 1,
+            duration: 400,
+            useNativeDriver: true,
+          }),
+          Animated.timing(dotOpacity, {
+            toValue: 0.3,
+            duration: 400,
+            useNativeDriver: true,
+          }),
+        ]);
+      };
+
+      Animated.loop(
+        Animated.parallel([
+          createDotAnimation(dot1Opacity, 0),
+          createDotAnimation(dot2Opacity, 200),
+          createDotAnimation(dot3Opacity, 400),
+        ])
+      ).start();
+    } else {
+      dot1Opacity.setValue(0.3);
+      dot2Opacity.setValue(0.3);
+      dot3Opacity.setValue(0.3);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    // Only set up auto-scroll if there are cards to scroll
+    if (totalCards === 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % totalCards;
+        const scrollPosition = nextIndex * cardWidth;
+
+        scrollViewRef.current?.scrollTo({
+          x: scrollPosition,
+          animated: true,
+        });
+
+        return nextIndex;
+      });
+    }, 3000); // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [totalCards]); // Add totalCards as dependency
+
+  // To Fetch the data from API
+  useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+    setIsEmpty(false);
+
+    fetch(`${NGROK_API}/springboot/security/getPopularProducts`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        console.log('API response status:', response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('API data received:', data);
+
+        // Check if data is empty
+        if (!data || data.length === 0) {
+          setIsEmpty(true);
+          setPopularProducts([]);
+          setIsLoading(false);
+          return;
+        }
+
+        // Process the data to convert base64 images
+        const processedData = data.map((product: any) => ({
+          ...product,
+          imageSource: convertBase64ToImageSource(product.imageSource)
+        }));
+
+        console.log('Processed data with base64 images:', processedData);
+        setPopularProducts(processedData);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching popular products:", error);
+        setError(error.message || 'Failed to load popular products. Please try again later.');
+        setIsLoading(false);
+      });
+  }, []);
+
+  return (
+    <View style={webStyles.section}>
+      <Text style={webStyles.sectionTitle}>Popular Products</Text>
+
+      {/* Loading State */}
+      {isLoading && (
+        <View style={webStyles.messageContainer}>
+          <View style={webStyles.loadingDotsContainer}>
+            <Animated.Text style={[webStyles.loadingDot, { opacity: dot1Opacity }]}>
+              ●
+            </Animated.Text>
+            <Animated.Text style={[webStyles.loadingDot, { opacity: dot2Opacity }]}>
+              ●
+            </Animated.Text>
+            <Animated.Text style={[webStyles.loadingDot, { opacity: dot3Opacity }]}>
+              ●
+            </Animated.Text>
+          </View>
+          <Text style={webStyles.messageText}>Loading...</Text>
+        </View>
+      )}
+
+      {/* Error State */}
+      {!isLoading && error && (
+        <View style={webStyles.messageContainer}>
+          <MaterialIcons name="error-outline" size={48} color="#d32f2f" style={webStyles.errorIcon} />
+          <Text style={webStyles.errorText}>{error}</Text>
+          <Text style={webStyles.errorSubText}>Please check your connection and try again</Text>
+        </View>
+      )}
+
+      {/* Empty State */}
+      {!isLoading && !error && isEmpty && (
+        <View style={webStyles.messageContainer}>
+          <MaterialIcons name="inbox" size={48} color="#999" style={webStyles.emptyIcon} />
+          <Text style={webStyles.emptyText}>No deals available right now</Text>
+          <Text style={webStyles.emptySubText}>Check back soon for exciting offers!</Text>
+        </View>
+      )}
+
+      {/* Success State - Show Products */}
+      {!isLoading && !error && !isEmpty && popularProducts.length > 0 && (
+        <>
+          <ScrollView
+            ref={scrollViewRef}
+            contentContainerStyle={webStyles.sectionContent}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled={false}
+            decelerationRate="fast"
+            snapToInterval={cardWidth}
+            snapToAlignment="start"
+            onMomentumScrollEnd={(event) => {
+              const scrollPosition = event.nativeEvent.contentOffset.x;
+              const index = Math.round(scrollPosition / cardWidth);
+              setCurrentIndex(index % totalCards);
+            }}
+          >
+            {popularProducts.map((product, index) => (
+              <ProductCard
+                key={product.dealId || index}
+                imageSource={product.imageSource}
+                productName={product.productName}
+                discount={product.discount}
+                originalPrice={`$${product.originalPrice}`}
+                discountedPrice={`$${product.discountedPrice}`}
+                rating={product.rating.toString()}
+                reviewCount={product.reviewCount.toString()}
+                timer={product.timer}
+                isWishlisted={product.wishlisted}
+                isInCart={product.inCart}
+                onAddToWishlist={() =>
+                  console.log(`Add to wishlist - ${product.productName}`)
+                }
+                onAddToCart={() =>
+                  console.log(`Add to cart - ${product.productName}`)
+                }
+                onBuyNow={() => console.log(`Buy now - ${product.productName}`)}
+                onCardPress={() =>
+                  console.log(`Card pressed - ${product.productName}`)
+                }
+              />
+            ))}
+          </ScrollView>
+          <View style={webStyles.indicatorContainer}>
+            {Array.from({ length: totalCards }, (_, index) => (
+              <View
+                key={index}
+                style={[
+                  webStyles.indicator,
+                  currentIndex === index && webStyles.activeIndicator,
+                ]}
+              />
+            ))}
+          </View>
+        </>
+      )}
+    </View>
+  );
+};
+
+export default PopularProduct;
 
 const webStyles = StyleSheet.create({
   section: {
@@ -276,5 +320,57 @@ const webStyles = StyleSheet.create({
   },
   activeIndicator: {
     backgroundColor: "#007AFF",
+  },
+  messageContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 60,
+    paddingHorizontal: 20,
+  },
+  loadingDotsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 16,
+  },
+  loadingDot: {
+    fontSize: 32,
+    color: "#007AFF",
+  },
+  messageText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+  },
+  errorIcon: {
+    marginBottom: 16,
+  },
+  errorText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#d32f2f",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  errorSubText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+  },
+  emptyIcon: {
+    marginBottom: 16,
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  emptySubText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
   },
 });

@@ -9,7 +9,7 @@ import PageHeading from "../Components/PageHeading";
 import ProductCategory from "../Components/ProductCategory";
 import MobileHome from "./MobileHome";
 import DealsPage from "./HomeComponents/DealsPage";
-import PopularStore from "./HomeComponents/PopularSore";
+import PopularStore from "./HomeComponents/PopularStore";
 import PopularProduct from "./HomeComponents/PopularProduct";
 import TrendingStore from "./HomeComponents/TrendingStore";
 import TrendingProduct from "./HomeComponents/TrendingProduct";
