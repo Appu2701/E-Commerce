@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -23,6 +23,14 @@ const ForgetPassword = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
+  const otpRefs = useRef<TextInput[]>([]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      setTimeout(() => otpRefs.current[0]?.focus(), 100);
+    }
+  }, [modalVisible]);
 
   const handleSignUp = () => {
     navigation.navigate("Login");
@@ -134,9 +142,31 @@ const ForgetPassword = () => {
                       {[...Array(6)].map((_, idx) => (
                         <TextInput
                           key={idx}
+                          ref={(el) => {
+                            if (el) otpRefs.current[idx] = el;
+                          }}
                           style={mobStyles.otpInput}
                           maxLength={1}
                           keyboardType="number-pad"
+                          value={otp[idx]}
+                          onChangeText={(text) => {
+                            const newOtp = [...otp];
+                            newOtp[idx] = text;
+                            setOtp(newOtp);
+                            if (text && idx < 5) {
+                              otpRefs.current[idx + 1]?.focus();
+                            }
+                          }}
+                          onKeyPress={(e) => {
+                            if (
+                              e.nativeEvent.key === "Backspace" &&
+                              !otp[idx] &&
+                              idx > 0
+                            ) {
+                              otpRefs.current[idx - 1]?.focus();
+                            }
+                          }}
+                          selectTextOnFocus
                         />
                       ))}
                     </View>
@@ -308,9 +338,31 @@ const ForgetPassword = () => {
                       {[...Array(6)].map((_, idx) => (
                         <TextInput
                           key={idx}
+                          ref={(el) => {
+                            if (el) otpRefs.current[idx] = el;
+                          }}
                           style={webStyles.otpInput}
                           maxLength={1}
                           keyboardType="number-pad"
+                          value={otp[idx]}
+                          onChangeText={(text) => {
+                            const newOtp = [...otp];
+                            newOtp[idx] = text;
+                            setOtp(newOtp);
+                            if (text && idx < 5) {
+                              otpRefs.current[idx + 1]?.focus();
+                            }
+                          }}
+                          onKeyPress={(e) => {
+                            if (
+                              e.nativeEvent.key === "Backspace" &&
+                              !otp[idx] &&
+                              idx > 0
+                            ) {
+                              otpRefs.current[idx - 1]?.focus();
+                            }
+                          }}
+                          selectTextOnFocus
                         />
                       ))}
                     </View>
