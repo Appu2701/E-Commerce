@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +12,7 @@ import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import PageHeading from "../ComponentsWeb/PageHeading";
 import Footer from "../ComponentsWeb/Footer";
 import RecommandedProduct from "../ComponentsWeb/RecommandedProduct";
+import MobileLayout from "../ComponentsMobile/MobileLayout";
 
 const Product = () => {
   const getStarFills = (value: number) => {
@@ -222,9 +222,12 @@ const Product = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <View style={mobStyles.container}>
+        <MobileLayout>
           <Text>Product Page - Coming Soon</Text>
-        </View>
+        </MobileLayout>
+        // <View style={mobStyles.container}>
+        //   <Text>Product Page - Coming Soon</Text>
+        // </View>
       ) : (
         <View style={webStyles.container}>
           <PageHeading />

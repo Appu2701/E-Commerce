@@ -1,27 +1,23 @@
 import { useRef, useEffect, useState } from "react";
 import { View, FlatList, StyleSheet, Text, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import MobileProductCard from "../../ComponentsMobile/MobileProductCard";
+import MobileStoreCard from "../../ComponentsMobile/MobileStoreCard";
 import { NGROK_API } from "../../config/api";
 
-export interface DealProduct {
-  dealId: number;
+export interface TrendingStore {
+  id: number;
   imageSource: any; // Can be require() statement or network URL
-  productName: string;
-  discount: string;
-  originalPrice: number;
-  discountedPrice: number;
+  storeName: string;
   rating: number;
-  reviewCount: number;
-  timer: string;
-  wishlisted: boolean;
-  inCart: boolean;
+  ratingCount: number;
+  categories: { name: string; bgColor: string; color?: string }[];
+  isWishlisted: boolean;
 }
 
-const MobileDealsPage = () => {
+const MobileTrendingStore = () => {
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [dealsProducts, setDealsProducts] = useState<DealProduct[]>([]);
+  const [trendingStores, setTrendingStores] = useState<TrendingStore[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -38,7 +34,7 @@ const MobileDealsPage = () => {
   ) => {
     // If value is null, undefined, or empty, return default image
     if (!base64String || base64String.trim() === "") {
-      return require("../../assets/img1.jpg");
+      return require("../../assets/store1.jpg");
     }
 
     // Check if the string already has the data URI prefix
@@ -109,7 +105,7 @@ const MobileDealsPage = () => {
     setError(null);
     setIsEmpty(false);
 
-    fetch(`${NGROK_API}/springboot/security/getDealsOfTheDay`, {
+    fetch(`${NGROK_API}/springboot/security/getTrendingStore`, {
       headers: {
         "ngrok-skip-browser-warning": "true",
         "Content-Type": "application/json",
@@ -128,7 +124,7 @@ const MobileDealsPage = () => {
         // Check if data is empty
         if (!data || data.length === 0) {
           setIsEmpty(true);
-          setDealsProducts([]);
+          setTrendingStores([]);
           setIsLoading(false);
           return;
         }
@@ -140,7 +136,7 @@ const MobileDealsPage = () => {
         }));
 
         console.log("Processed data with base64 images:", processedData);
-        setDealsProducts(processedData);
+        setTrendingStores(processedData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -155,7 +151,7 @@ const MobileDealsPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % dealsProducts.length;
+        const nextIndex = (prevIndex + 1) % trendingStores.length;
         flatListRef.current?.scrollToIndex({
           index: nextIndex,
           animated: true,
@@ -165,12 +161,12 @@ const MobileDealsPage = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [dealsProducts.length]);
+  }, [trendingStores.length]);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Deals Of The Day</Text>
+        <Text style={styles.headerText}>Trending Stores</Text>
       </View>
       {/* Loading State */}
       {isLoading && (
@@ -228,43 +224,32 @@ const MobileDealsPage = () => {
         </View>
       )}
 
-      {!isLoading && !error && !isEmpty && dealsProducts.length > 0 && (
+      {!isLoading && !error && !isEmpty && trendingStores.length > 0 && (
         <>
           <FlatList
             ref={flatListRef}
-            data={dealsProducts}
+            data={trendingStores}
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <MobileProductCard
+              <MobileStoreCard
                 imageSource={item.imageSource}
-                productName={item.productName}
-                discount={item.discount}
-                originalPrice={item.originalPrice}
-                discountedPrice={item.discountedPrice}
+                storeName={item.storeName}
                 rating={item.rating}
-                reviewCount={item.reviewCount}
-                timer={item.timer}
+                ratingCount={item.reviewCount}
+                categories={item.categories}
                 isWishlisted={item.isWishlisted}
-                isInCart={item.isInCart}
-                onAddToWishlist={() =>
-                  console.log(`Add to wishlist - ${item.productName}`)
-                }
-                onAddToCart={() =>
-                  console.log(`Add to cart - ${item.productName}`)
-                }
-                onBuyNow={() => console.log(`Buy now - ${item.productName}`)}
-                onCardPress={() =>
-                  console.log(`Card pressed - ${item.productName}`)
-                }
+                onWishlistPress={() => console.log(`Wishlist toggled for ${item.storeName}`)}
+                onCardPress={() => console.log(`${item.storeName} pressed`)}
+                onViewMorePress={() => console.log(`View more for ${item.storeName}`)}
               />
             )}
             style={styles.content}
             contentContainerStyle={styles.contentContainer}
           />
           <View style={styles.indicatorsContainer}>
-            {dealsProducts.map((_, index) => (
+            {trendingStores.map((_, index) => (
               <View
                 key={index}
                 style={[
@@ -288,7 +273,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     width: "100%",
-    height: 450,
+    height: 400,
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
@@ -391,4 +376,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MobileDealsPage;
+export default MobileTrendingStore;

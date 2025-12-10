@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 interface MobileLayoutProps {
   children: React.ReactNode;
   scrollTopBar?: boolean;
   scrollBottomBar?: boolean;
+  hideCategoriesTab?: boolean;
 }
 
-const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = false, scrollBottomBar = false }) => {
+const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = false, scrollBottomBar = false, hideCategoriesTab = false }) => {
   const scrollTop = scrollTopBar;
   const scrollBottom = scrollBottomBar;
 
@@ -30,7 +31,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
               <TextInput placeholder="Search..." />
             </View>
             <View style={styles.topBarSection}>
-              <FontAwesome name="shopping-bag" size={24} color="black" />
+              <FontAwesome5 name="shopping-cart" size={24} color="black" />
               <Text>Cart</Text>
             </View>
           </View>
@@ -46,10 +47,12 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
               <FontAwesome name="shopping-bag" size={24} color="black" />
               <Text>Orders</Text>
             </View>
-            <View style={styles.bottomBarSection}>
-              <FontAwesome name="th-large" size={24} color="black" />
-              <Text style={{ fontSize: 12 }}>Categories</Text>
-            </View>
+            {!hideCategoriesTab && (
+              <View style={styles.bottomBarSection}>
+                <FontAwesome name="th-large" size={24} color="black" />
+                <Text style={{ fontSize: 12 }}>Categories</Text>
+              </View>
+            )}
             <View style={styles.bottomBarSection}>
               <FontAwesome name="heart" size={24} color="black" />
               <Text>Wishlist</Text>
@@ -79,7 +82,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
               <TextInput placeholder="Search..." />
             </View>
             <View style={styles.topBarSection}>
-              <FontAwesome name="shopping-bag" size={24} color="black" />
+              <FontAwesome5 name="shopping-cart" size={24} color="black" />
               <Text>Cart</Text>
             </View>
           </View>
@@ -96,10 +99,12 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
             <FontAwesome name="shopping-bag" size={24} color="black" />
             <Text>Orders</Text>
           </View>
-          <View style={styles.bottomBarSection}>
-            <FontAwesome name="th-large" size={24} color="black" />
-            <Text style={{ fontSize: 12 }}>Categories</Text>
-          </View>
+          {!hideCategoriesTab && (
+            <View style={styles.bottomBarSection}>
+              <FontAwesome name="th-large" size={24} color="black" />
+              <Text style={{ fontSize: 12 }}>Categories</Text>
+            </View>
+          )}
           <View style={styles.bottomBarSection}>
             <FontAwesome name="heart" size={24} color="black" />
             <Text>Wishlist</Text>
@@ -127,7 +132,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
               <TextInput placeholder="Search..." />
             </View>
             <View style={styles.topBarSection}>
-              <FontAwesome name="shopping-bag" size={24} color="black" />
+              <FontAwesome5 name="shopping-cart" size={24} color="black" />
               <Text>Cart</Text>
             </View>
           </View>
@@ -144,10 +149,12 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
                 <FontAwesome name="shopping-bag" size={24} color="black" />
                 <Text>Orders</Text>
               </View>
-              <View style={styles.bottomBarSection}>
-                <FontAwesome name="th-large" size={24} color="black" />
-                <Text style={{ fontSize: 12 }}>Categories</Text>
-              </View>
+              {!hideCategoriesTab && (
+                <View style={styles.bottomBarSection}>
+                  <FontAwesome name="th-large" size={24} color="black" />
+                  <Text style={{ fontSize: 12 }}>Categories</Text>
+                </View>
+              )}
               <View style={styles.bottomBarSection}>
                 <FontAwesome name="heart" size={24} color="black" />
                 <Text>Wishlist</Text>
@@ -176,7 +183,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
             <TextInput placeholder="Search..." />
           </View>
           <View style={styles.topBarSection}>
-            <FontAwesome name="shopping-bag" size={24} color="black" />
+            <FontAwesome5 name="shopping-cart" size={24} color="black" />
             <Text>Cart</Text>
           </View>
         </View>
@@ -194,10 +201,12 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
             <FontAwesome name="shopping-bag" size={24} color="black" />
             <Text>Orders</Text>
           </View>
-          <View style={styles.bottomBarSection}>
-            <FontAwesome name="th-large" size={24} color="black" />
-            <Text style={{ fontSize: 12 }}>Categories</Text>
-          </View>
+          {!hideCategoriesTab && (
+            <View style={styles.bottomBarSection}>
+              <FontAwesome name="th-large" size={24} color="black" />
+              <Text style={{ fontSize: 12 }}>Categories</Text>
+            </View>
+          )}
           <View style={styles.bottomBarSection}>
             <FontAwesome name="heart" size={24} color="black" />
             <Text>Wishlist</Text>
@@ -224,7 +233,7 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 70,
-    backgroundColor: "#a5ce10ff",
+    backgroundColor: "#faf61fff",
     flexDirection: "row",
     padding: 5,
     alignItems: "center",
@@ -274,7 +283,7 @@ const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: 80,
-    backgroundColor: "#ce1010ff",
+    backgroundColor: "#faf61fff",
     flexDirection: "row",
     padding: 5,
     alignItems: "center",
@@ -297,7 +306,7 @@ const styles = StyleSheet.create({
   topBarScrollable: {
     width: "100%",
     height: 70,
-    backgroundColor: "#a5ce10ff",
+    backgroundColor: "#faf61fff",
     flexDirection: "row",
     padding: 5,
     alignItems: "center",
@@ -310,7 +319,7 @@ const styles = StyleSheet.create({
   bottomBarScrollable: {
     width: "100%",
     height: 80,
-    backgroundColor: "#ce1010ff",
+    backgroundColor: "#faf61fff",
     flexDirection: "row",
     padding: 5,
     alignItems: "center",

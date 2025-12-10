@@ -17,14 +17,24 @@ import Footer from "../ComponentsWeb/Footer";
 import MobileLayout from "../ComponentsMobile/MobileLayout";
 import MobileBanner from "./MobileHomeComponents/MobileBanner";
 import MobileDealsPage from "./MobileHomeComponents/MobileDealsPage";
+import MobileTrendingStore from "./MobileHomeComponents/MobileTrendingStore";
+import MobileTrendingProducts from "./MobileHomeComponents/MobileTrendingProducts";
+import MobilePopularStore from "./MobileHomeComponents/MobilePopularStore";
+import MobilePopularProducts from "./MobileHomeComponents/MobilePopularProducts";
+import MobileProductCategory from "../ComponentsMobile/MobileProductCategory";
 
 const Home = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <MobileLayout>
+        <MobileLayout hideCategoriesTab={true}>
+          <MobileProductCategory />
           <MobileBanner />
           <MobileDealsPage />
+          <MobileTrendingStore />
+          <MobileTrendingProducts />
+          <MobilePopularStore />
+          <MobilePopularProducts />
         </MobileLayout>
       ) : (
         <View style={webStyles.container}>
