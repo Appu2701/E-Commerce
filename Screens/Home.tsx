@@ -5,22 +5,27 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import PageHeading from "../Components/PageHeading";
-import ProductCategory from "../Components/ProductCategory";
-import MobileHome from "./MobileHome";
-import DealsPage from "./HomeComponents/DealsPage";
-import PopularStore from "./HomeComponents/PopularStore";
-import PopularProduct from "./HomeComponents/PopularProduct";
-import TrendingStore from "./HomeComponents/TrendingStore";
-import TrendingProduct from "./HomeComponents/TrendingProduct";
-import Banner from "./HomeComponents/Banner";
-import Footer from "../Components/Footer";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import ProductCategory from "../ComponentsWeb/ProductCategory";
+import DealsPage from "./WebHomeComponents/DealsPage";
+import PopularStore from "./WebHomeComponents/PopularStore";
+import PopularProduct from "./WebHomeComponents/PopularProduct";
+import TrendingStore from "./WebHomeComponents/TrendingStore";
+import TrendingProduct from "./WebHomeComponents/TrendingProduct";
+import Banner from "./WebHomeComponents/Banner";
+import Footer from "../ComponentsWeb/Footer";
+import MobileLayout from "../ComponentsMobile/MobileLayout";
+import MobileBanner from "./MobileHomeComponents/MobileBanner";
+import MobileDealsPage from "./MobileHomeComponents/MobileDealsPage";
 
 const Home = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <MobileHome />
+        <MobileLayout>
+          <MobileBanner />
+          <MobileDealsPage />
+        </MobileLayout>
       ) : (
         <View style={webStyles.container}>
           <PageHeading />

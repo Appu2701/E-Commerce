@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrdersScreenNavigationProp } from "../types/navigation";
-import PageHeading from "../Components/PageHeading";
-import OrderCard from "../Components/OrderCard";
-import Footer from "../Components/Footer";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import OrderCard from "../ComponentsWeb/OrderCard";
+import Footer from "../ComponentsWeb/Footer";
 import { FontAwesome } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 

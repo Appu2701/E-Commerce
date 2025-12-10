@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import PageHeading from "../Components/PageHeading";
-import Footer from "../Components/Footer";
-import WishListedProductCard from "../Components/WishListedProductCard";
-import WishListedStoreCard from "../Components/WishListedStoreCard";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import Footer from "../ComponentsWeb/Footer";
+import WishListedProductCard from "../ComponentsWeb/WishListedProductCard";
+import WishListedStoreCard from "../ComponentsWeb/WishListedStoreCard";
 
 const WishList = () => {
   const [activeTab, setActiveTab] = useState<"products" | "stores">("products");

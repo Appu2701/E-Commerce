@@ -7,11 +7,11 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import PageHeading from "../../Components/PageHeading";
-import Footer from "../../Components/Footer";
-import CategoryHeaderSection from "../../Components/CategoryHeaderSection";
-import CategoryStoreSection from "../../Components/CategoryStoreSection";
-import CategoryProductSection from "../../Components/CategoryProductSection";
+import PageHeading from "../../ComponentsWeb/PageHeading";
+import Footer from "../../ComponentsWeb/Footer";
+import CategoryHeaderSection from "../../ComponentsWeb/CategoryHeaderSection";
+import CategoryStoreSection from "../../ComponentsWeb/CategoryStoreSection";
+import CategoryProductSection from "../../ComponentsWeb/CategoryProductSection";
 
 const Grocery = () => {
   const [isStoreExpanded, setIsStoreExpanded] = useState(false);

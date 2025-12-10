@@ -10,9 +10,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import PageHeading from "../Components/PageHeading";
-import Footer from "../Components/Footer";
-import RecommandedProduct from "../Components/RecommandedProduct";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import Footer from "../ComponentsWeb/Footer";
+import RecommandedProduct from "../ComponentsWeb/RecommandedProduct";
 
 const Product = () => {
   const getStarFills = (value: number) => {

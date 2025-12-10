@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-import PageHeading from "../Components/PageHeading";
-import CartProductCard from "../Components/CartProductCard";
-import Footer from "../Components/Footer";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import CartProductCard from "../ComponentsWeb/CartProductCard";
+import Footer from "../ComponentsWeb/Footer";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([

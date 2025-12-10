@@ -13,7 +13,7 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { ForgetPasswordScreenNavigationProp } from "../types/navigation";
-import FloatingLabelInput from "../Components/FloatingLabelInput";
+import FloatingLabelInput from "../ComponentsWeb/FloatingLabelInput";
 
 const ForgetPassword = () => {
   const navigation = useNavigation<ForgetPasswordScreenNavigationProp>();

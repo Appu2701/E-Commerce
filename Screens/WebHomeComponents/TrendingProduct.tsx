@@ -1,23 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import StoreCard from "../../Components/StoreCard";
+import ProductCard from "../../ComponentsWeb/ProductCard";
 import { NGROK_API } from "../../config/api";
 
-export interface PopularStore {
-  id: number;
+export interface TrendingProduct {
+  dealId: number;
   imageSource: any; // Can be require() statement or network URL
-  storeName: string;
+  productName: string;
+  discount: string;
+  originalPrice: number;
+  discountedPrice: number;
   rating: number;
-  ratingCount: number;
-  categories: { name: string; bgColor: string; color?: string }[];
-  isWishlisted: boolean;
+  reviewCount: number;
+  timer: string;
+  wishlisted: boolean;
+  inCart: boolean;
 }
 
-const PopularStore = () => {
+const TrendingProduct = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
-  const [popularStores, setPopularStores] = useState<PopularStore[]>([]);
+  const [trendingProducts, setTrendingProducts] = useState<TrendingProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -28,15 +32,14 @@ const PopularStore = () => {
   const dot2Opacity = useRef(new Animated.Value(0.3)).current;
   const dot3Opacity = useRef(new Animated.Value(0.3)).current;
 
-  const totalCards = popularStores.length;
-  const cardWidth = 330; // Card width + margin (315 + 15)
-
+  const cardWidth = 260; // Card width + margin (250 + 10)
+  const totalCards = trendingProducts.length;
 
   // Helper function to convert base64 image data to URI
   const convertBase64ToImageSource = (base64String: string | null | undefined) => {
     // If value is null, undefined, or empty, return default image
     if (!base64String || base64String.trim() === '') {
-      return require('../../assets/store1.jpg');
+      return require('../../assets/img1.jpg');
     }
 
     // Check if the string already has the data URI prefix
@@ -125,7 +128,7 @@ const PopularStore = () => {
     setError(null);
     setIsEmpty(false);
 
-    fetch(`${NGROK_API}/springboot/security/getPopularStore`, {
+    fetch(`${NGROK_API}/springboot/security/getTrendingProducts`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
         'Content-Type': 'application/json'
@@ -144,7 +147,7 @@ const PopularStore = () => {
         // Check if data is empty
         if (!data || data.length === 0) {
           setIsEmpty(true);
-          setPopularStores([]);
+          setTrendingProducts([]);
           setIsLoading(false);
           return;
         }
@@ -156,7 +159,7 @@ const PopularStore = () => {
         }));
 
         console.log('Processed data with base64 images:', processedData);
-        setPopularStores(processedData);
+        setTrendingProducts(processedData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -165,9 +168,11 @@ const PopularStore = () => {
         setIsLoading(false);
       });
   }, []);
+
   return (
     <View style={webStyles.section}>
-      <Text style={webStyles.sectionTitle}>Popular Stores</Text>
+      <Text style={webStyles.sectionTitle}>Trending Products</Text>
+
       {/* Loading State */}
       {isLoading && (
         <View style={webStyles.messageContainer}>
@@ -204,7 +209,8 @@ const PopularStore = () => {
         </View>
       )}
 
-      {!isLoading && !error && !isEmpty && popularStores.length > 0 && (
+      {/* Success State - Show Products */}
+      {!isLoading && !error && !isEmpty && trendingProducts.length > 0 && (
         <>
           <ScrollView
             ref={scrollViewRef}
@@ -221,18 +227,29 @@ const PopularStore = () => {
               setCurrentIndex(index % totalCards);
             }}
           >
-            {popularStores.map((store) => (
-              <StoreCard
-                key={store.id}
-                imageSource={store.imageSource}
-                storeName={store.storeName}
-                rating={store.rating}
-                ratingCount={store.ratingCount}
-                categories={store.categories}
-                isWishlisted={store.isWishlisted}
-                onWishlistPress={() => console.log(`Wishlist toggled for ${store.storeName}`)}
-                onCardPress={() => console.log(`${store.storeName} pressed`)}
-                onViewMorePress={() => console.log(`View more for ${store.storeName}`)}
+            {trendingProducts.map((product, index) => (
+              <ProductCard
+                key={product.dealId || index}
+                imageSource={product.imageSource}
+                productName={product.productName}
+                discount={product.discount}
+                originalPrice={`$${product.originalPrice}`}
+                discountedPrice={`$${product.discountedPrice}`}
+                rating={product.rating.toString()}
+                reviewCount={product.reviewCount.toString()}
+                timer={product.timer}
+                isWishlisted={product.wishlisted}
+                isInCart={product.inCart}
+                onAddToWishlist={() =>
+                  console.log(`Add to wishlist - ${product.productName}`)
+                }
+                onAddToCart={() =>
+                  console.log(`Add to cart - ${product.productName}`)
+                }
+                onBuyNow={() => console.log(`Buy now - ${product.productName}`)}
+                onCardPress={() =>
+                  console.log(`Card pressed - ${product.productName}`)
+                }
               />
             ))}
           </ScrollView>
@@ -253,13 +270,13 @@ const PopularStore = () => {
   );
 };
 
-export default PopularStore;
+export default TrendingProduct;
 
 const webStyles = StyleSheet.create({
   section: {
     width: "100%",
     alignItems: "center",
-    height: 430,
+    height: 420,
     backgroundColor: "#fff",
     marginTop: 10,
     borderTopLeftRadius: 10,

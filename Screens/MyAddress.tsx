@@ -6,9 +6,9 @@ import {
   Dimensions,
   Text,
 } from "react-native";
-import PageHeading from "../Components/PageHeading";
-import AddressCard from "../Components/AddressCard";
-import Footer from "../Components/Footer";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import AddressCard from "../ComponentsWeb/AddressCard";
+import Footer from "../ComponentsWeb/Footer";
 
 const MyAddress = () => {
   return (

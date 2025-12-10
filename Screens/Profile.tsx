@@ -12,11 +12,11 @@ import { useNavigation } from "@react-navigation/native";
 import { ProfileScreenNavigationProp } from "../types/navigation";
 import { useUser } from "../context/UserContext";
 import { useEffect } from "react";
-import PageHeading from "../Components/PageHeading";
-import Footer from "../Components/Footer";
-import OrderCard from "../Components/OrderCard";
-import AddressCard from "../Components/AddressCard";
-import PaymentCard from "../Components/PaymentCard";
+import PageHeading from "../ComponentsWeb/PageHeading";
+import Footer from "../ComponentsWeb/Footer";
+import OrderCard from "../ComponentsWeb/OrderCard";
+import AddressCard from "../ComponentsWeb/AddressCard";
+import PaymentCard from "../ComponentsWeb/PaymentCard";
 
 const Profile = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();

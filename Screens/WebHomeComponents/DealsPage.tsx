@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ProductCard from "../../Components/ProductCard";
+import ProductCard from "../../ComponentsWeb/ProductCard";
 import { NGROK_API } from "../../config/api";
 
-export interface PopularProduct {
+export interface DealProduct {
   dealId: number;
   imageSource: any; // Can be require() statement or network URL
   productName: string;
@@ -18,10 +18,10 @@ export interface PopularProduct {
   inCart: boolean;
 }
 
-const PopularProduct = () => {
+const DealsPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
-  const [popularProducts, setPopularProducts] = useState<PopularProduct[]>([]);
+  const [dealsProducts, setDealsProducts] = useState<DealProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -33,7 +33,7 @@ const PopularProduct = () => {
   const dot3Opacity = useRef(new Animated.Value(0.3)).current;
 
   const cardWidth = 260; // Card width + margin (250 + 10)
-  const totalCards = popularProducts.length;
+  const totalCards = dealsProducts.length;
 
   // Helper function to convert base64 image data to URI
   const convertBase64ToImageSource = (base64String: string | null | undefined) => {
@@ -128,7 +128,7 @@ const PopularProduct = () => {
     setError(null);
     setIsEmpty(false);
 
-    fetch(`${NGROK_API}/springboot/security/getPopularProducts`, {
+    fetch(`${NGROK_API}/springboot/security/getDealsOfTheDay`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
         'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ const PopularProduct = () => {
         // Check if data is empty
         if (!data || data.length === 0) {
           setIsEmpty(true);
-          setPopularProducts([]);
+          setDealsProducts([]);
           setIsLoading(false);
           return;
         }
@@ -159,19 +159,19 @@ const PopularProduct = () => {
         }));
 
         console.log('Processed data with base64 images:', processedData);
-        setPopularProducts(processedData);
+        setDealsProducts(processedData);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching popular products:", error);
-        setError(error.message || 'Failed to load popular products. Please try again later.');
+        console.error("Error fetching deals products:", error);
+        setError(error.message || 'Failed to load deals. Please try again later.');
         setIsLoading(false);
       });
   }, []);
 
   return (
     <View style={webStyles.section}>
-      <Text style={webStyles.sectionTitle}>Popular Products</Text>
+      <Text style={webStyles.sectionTitle}>Deals Of the day</Text>
 
       {/* Loading State */}
       {isLoading && (
@@ -210,7 +210,7 @@ const PopularProduct = () => {
       )}
 
       {/* Success State - Show Products */}
-      {!isLoading && !error && !isEmpty && popularProducts.length > 0 && (
+      {!isLoading && !error && !isEmpty && dealsProducts.length > 0 && (
         <>
           <ScrollView
             ref={scrollViewRef}
@@ -227,7 +227,7 @@ const PopularProduct = () => {
               setCurrentIndex(index % totalCards);
             }}
           >
-            {popularProducts.map((product, index) => (
+            {dealsProducts.map((product, index) => (
               <ProductCard
                 key={product.dealId || index}
                 imageSource={product.imageSource}
@@ -270,7 +270,7 @@ const PopularProduct = () => {
   );
 };
 
-export default PopularProduct;
+export default DealsPage;
 
 const webStyles = StyleSheet.create({
   section: {

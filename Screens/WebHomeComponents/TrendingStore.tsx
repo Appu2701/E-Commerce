@@ -1,27 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ProductCard from "../../Components/ProductCard";
+import StoreCard from "../../ComponentsWeb/StoreCard";
 import { NGROK_API } from "../../config/api";
 
-export interface DealProduct {
-  dealId: number;
+export interface TrendingStore {
+  id: number;
   imageSource: any; // Can be require() statement or network URL
-  productName: string;
-  discount: string;
-  originalPrice: number;
-  discountedPrice: number;
+  storeName: string;
   rating: number;
-  reviewCount: number;
-  timer: string;
-  wishlisted: boolean;
-  inCart: boolean;
+  ratingCount: number;
+  categories: { name: string; bgColor: string; color?: string }[];
+  isWishlisted: boolean;
 }
 
-const DealsPage = () => {
+const TrendingStore = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
-  const [dealsProducts, setDealsProducts] = useState<DealProduct[]>([]);
+  const [trendingStores, setTrendingStores] = useState<TrendingStore[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -32,14 +28,15 @@ const DealsPage = () => {
   const dot2Opacity = useRef(new Animated.Value(0.3)).current;
   const dot3Opacity = useRef(new Animated.Value(0.3)).current;
 
-  const cardWidth = 260; // Card width + margin (250 + 10)
-  const totalCards = dealsProducts.length;
+  const totalCards = trendingStores.length;
+  const cardWidth = 330; // Card width + margin (315 + 15)
+
 
   // Helper function to convert base64 image data to URI
   const convertBase64ToImageSource = (base64String: string | null | undefined) => {
     // If value is null, undefined, or empty, return default image
     if (!base64String || base64String.trim() === '') {
-      return require('../../assets/img1.jpg');
+      return require('../../assets/store1.jpg');
     }
 
     // Check if the string already has the data URI prefix
@@ -128,7 +125,7 @@ const DealsPage = () => {
     setError(null);
     setIsEmpty(false);
 
-    fetch(`${NGROK_API}/springboot/security/getDealsOfTheDay`, {
+    fetch(`${NGROK_API}/springboot/security/getTrendingStore`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
         'Content-Type': 'application/json'
@@ -147,7 +144,7 @@ const DealsPage = () => {
         // Check if data is empty
         if (!data || data.length === 0) {
           setIsEmpty(true);
-          setDealsProducts([]);
+          setTrendingStores([]);
           setIsLoading(false);
           return;
         }
@@ -159,7 +156,7 @@ const DealsPage = () => {
         }));
 
         console.log('Processed data with base64 images:', processedData);
-        setDealsProducts(processedData);
+        setTrendingStores(processedData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -168,11 +165,9 @@ const DealsPage = () => {
         setIsLoading(false);
       });
   }, []);
-
   return (
     <View style={webStyles.section}>
-      <Text style={webStyles.sectionTitle}>Deals Of the day</Text>
-
+      <Text style={webStyles.sectionTitle}>Trending Stores</Text>
       {/* Loading State */}
       {isLoading && (
         <View style={webStyles.messageContainer}>
@@ -209,8 +204,7 @@ const DealsPage = () => {
         </View>
       )}
 
-      {/* Success State - Show Products */}
-      {!isLoading && !error && !isEmpty && dealsProducts.length > 0 && (
+      {!isLoading && !error && !isEmpty && trendingStores.length > 0 && (
         <>
           <ScrollView
             ref={scrollViewRef}
@@ -227,29 +221,18 @@ const DealsPage = () => {
               setCurrentIndex(index % totalCards);
             }}
           >
-            {dealsProducts.map((product, index) => (
-              <ProductCard
-                key={product.dealId || index}
-                imageSource={product.imageSource}
-                productName={product.productName}
-                discount={product.discount}
-                originalPrice={`$${product.originalPrice}`}
-                discountedPrice={`$${product.discountedPrice}`}
-                rating={product.rating.toString()}
-                reviewCount={product.reviewCount.toString()}
-                timer={product.timer}
-                isWishlisted={product.wishlisted}
-                isInCart={product.inCart}
-                onAddToWishlist={() =>
-                  console.log(`Add to wishlist - ${product.productName}`)
-                }
-                onAddToCart={() =>
-                  console.log(`Add to cart - ${product.productName}`)
-                }
-                onBuyNow={() => console.log(`Buy now - ${product.productName}`)}
-                onCardPress={() =>
-                  console.log(`Card pressed - ${product.productName}`)
-                }
+            {trendingStores.map((store) => (
+              <StoreCard
+                key={store.id}
+                imageSource={store.imageSource}
+                storeName={store.storeName}
+                rating={store.rating}
+                ratingCount={store.ratingCount}
+                categories={store.categories}
+                isWishlisted={store.isWishlisted}
+                onWishlistPress={() => console.log(`Wishlist toggled for ${store.storeName}`)}
+                onCardPress={() => console.log(`${store.storeName} pressed`)}
+                onViewMorePress={() => console.log(`View more for ${store.storeName}`)}
               />
             ))}
           </ScrollView>
@@ -270,13 +253,13 @@ const DealsPage = () => {
   );
 };
 
-export default DealsPage;
+export default TrendingStore;
 
 const webStyles = StyleSheet.create({
   section: {
     width: "100%",
     alignItems: "center",
-    height: 420,
+    height: 430,
     backgroundColor: "#fff",
     marginTop: 10,
     borderTopLeftRadius: 10,

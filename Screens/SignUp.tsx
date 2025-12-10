@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SignUpScreenNavigationProp } from "../types/navigation";
-import FloatingLabelInput from "../Components/FloatingLabelInput";
+import FloatingLabelInput from "../ComponentsWeb/FloatingLabelInput";
 
 const SignUp = () => {
   const navigation = useNavigation<SignUpScreenNavigationProp>();

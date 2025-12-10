@@ -6,8 +6,8 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import PageHeading from "../../Components/PageHeading";
-import Footer from "../../Components/Footer";
+import PageHeading from "../../ComponentsWeb/PageHeading";
+import Footer from "../../ComponentsWeb/Footer";
 
 const Books = () => {
   return (

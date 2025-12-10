@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import StoreCard from "../../Components/StoreCard";
+import StoreCard from "../../ComponentsWeb/StoreCard";
 import { NGROK_API } from "../../config/api";
 
-export interface TrendingStore {
+export interface PopularStore {
   id: number;
   imageSource: any; // Can be require() statement or network URL
   storeName: string;
@@ -14,10 +14,10 @@ export interface TrendingStore {
   isWishlisted: boolean;
 }
 
-const TrendingStore = () => {
+const PopularStore = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
-  const [trendingStores, setTrendingStores] = useState<TrendingStore[]>([]);
+  const [popularStores, setPopularStores] = useState<PopularStore[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -28,7 +28,7 @@ const TrendingStore = () => {
   const dot2Opacity = useRef(new Animated.Value(0.3)).current;
   const dot3Opacity = useRef(new Animated.Value(0.3)).current;
 
-  const totalCards = trendingStores.length;
+  const totalCards = popularStores.length;
   const cardWidth = 330; // Card width + margin (315 + 15)
 
 
@@ -125,7 +125,7 @@ const TrendingStore = () => {
     setError(null);
     setIsEmpty(false);
 
-    fetch(`${NGROK_API}/springboot/security/getTrendingStore`, {
+    fetch(`${NGROK_API}/springboot/security/getPopularStore`, {
       headers: {
         'ngrok-skip-browser-warning': 'true',
         'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ const TrendingStore = () => {
         // Check if data is empty
         if (!data || data.length === 0) {
           setIsEmpty(true);
-          setTrendingStores([]);
+          setPopularStores([]);
           setIsLoading(false);
           return;
         }
@@ -156,7 +156,7 @@ const TrendingStore = () => {
         }));
 
         console.log('Processed data with base64 images:', processedData);
-        setTrendingStores(processedData);
+        setPopularStores(processedData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -167,7 +167,7 @@ const TrendingStore = () => {
   }, []);
   return (
     <View style={webStyles.section}>
-      <Text style={webStyles.sectionTitle}>Trending Stores</Text>
+      <Text style={webStyles.sectionTitle}>Popular Stores</Text>
       {/* Loading State */}
       {isLoading && (
         <View style={webStyles.messageContainer}>
@@ -204,7 +204,7 @@ const TrendingStore = () => {
         </View>
       )}
 
-      {!isLoading && !error && !isEmpty && trendingStores.length > 0 && (
+      {!isLoading && !error && !isEmpty && popularStores.length > 0 && (
         <>
           <ScrollView
             ref={scrollViewRef}
@@ -221,7 +221,7 @@ const TrendingStore = () => {
               setCurrentIndex(index % totalCards);
             }}
           >
-            {trendingStores.map((store) => (
+            {popularStores.map((store) => (
               <StoreCard
                 key={store.id}
                 imageSource={store.imageSource}
@@ -253,7 +253,7 @@ const TrendingStore = () => {
   );
 };
 
-export default TrendingStore;
+export default PopularStore;
 
 const webStyles = StyleSheet.create({
   section: {

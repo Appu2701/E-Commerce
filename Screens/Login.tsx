@@ -13,7 +13,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { LoginScreenNavigationProp } from "../types/navigation";
-import FloatingLabelInput from "../Components/FloatingLabelInput";
+import FloatingLabelInput from "../ComponentsWeb/FloatingLabelInput";
 import { API_BASE_URL } from "../config/api";
 import { useUser } from "../context/UserContext";
 
