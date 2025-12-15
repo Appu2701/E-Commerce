@@ -149,13 +149,18 @@ const MobileTrendingStore = () => {
   }, []);
 
   useEffect(() => {
+    // Only start auto-scroll when we have stores
+    if (trendingStores.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % trendingStores.length;
-        flatListRef.current?.scrollToIndex({
-          index: nextIndex,
-          animated: true,
-        });
+        if (flatListRef.current) {
+          flatListRef.current.scrollToIndex({
+            index: nextIndex,
+            animated: true,
+          });
+        }
         return nextIndex;
       });
     }, 3000);

@@ -22,7 +22,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
           <View style={styles.topBarScrollable}>
             <View style={styles.logoSection}>
               <Image
-                source={require("../assets/E-Commerce Logo.jpg")}
+                source={require("../assets/E-Commerce-Logo.jpg")}
                 style={styles.logo}
                 resizeMode="contain"
               />
@@ -73,7 +73,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
           <View style={styles.topBarScrollable}>
             <View style={styles.logoSection}>
               <Image
-                source={require("../assets/E-Commerce Logo.jpg")}
+                source={require("../assets/E-Commerce-Logo.jpg")}
                 style={styles.logo}
                 resizeMode="contain"
               />
@@ -123,7 +123,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
         <View style={styles.topBar}>
           <View style={styles.logoSection}>
             <Image
-              source={require("../assets/E-Commerce Logo.jpg")}
+              source={require("../assets/E-Commerce-Logo.jpg")}
               style={styles.logo}
                 resizeMode="contain"
               />
@@ -174,7 +174,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, scrollTopBar = fa
         <View style={styles.topBar}>
           <View style={styles.logoSection}>
             <Image
-              source={require("../assets/E-Commerce Logo.jpg")}
+              source={require("../assets/E-Commerce-Logo.jpg")}
               style={styles.logo}
               resizeMode="contain"
             />

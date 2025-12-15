@@ -8,6 +8,8 @@ import {
   Image,
   Platform,
   ActivityIndicator,
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -96,140 +98,146 @@ const Login = () => {
   return (
     <>
       {Platform.OS === "android" || Platform.OS === "ios" ? (
-        <View style={mobStyles.container}>
-          {/* Logo */}
-          <Image
-            source={require("../assets/E-Commerce Logo.jpg")}
-            style={mobStyles.logo}
-            resizeMode="contain"
-          />
+        <ScrollView
+          style={mobStyles.scrollView}
+          contentContainerStyle={mobStyles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={mobStyles.container}>
+            {/* Logo */}
+            <Image
+              source={require("../assets/E-Commerce-Logo.jpg")}
+              style={mobStyles.logo}
+              resizeMode="contain"
+            />
 
-          {/* Header */}
-          <View style={{ alignItems: "center", marginBottom: 40 }}>
-            <Text style={mobStyles.title}>Login</Text>
-          </View>
-
-          {/* Form Container */}
-          <View style={{ flex: 1, alignItems: "center" }}>
-            {/* Email or Phone input with error handling */}
-            <View style={{ width: "100%", marginBottom: 20 }}>
-              <FloatingLabelInput
-                label="Email or phone"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="default"
-                autoCapitalize="none"
-                returnKeyType="next"
-                // onSubmitEditing={handleSubmitEmail}
-                testID="email-phone-input"
-                isRequired={true}
-                // error={getEmailOrPhoneError()}
-                // showError={showErrors}
-              />
+            {/* Header */}
+            <View style={{ alignItems: "center", marginBottom: 40 }}>
+              <Text style={mobStyles.title}>Login</Text>
             </View>
 
-            {/* Password input with error handling */}
-            <View style={{ width: "100%", marginBottom: 10 }}>
-              <FloatingLabelInput
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={true}
-                showPasswordToggle={true}
-                returnKeyType="done"
-                // onSubmitEditing={handleSubmitPassword}
-                testID="password-input"
-                isRequired={true}
-                // error={getPasswordError()}
-                // showError={showErrors}
-              />
-            </View>
-
-            {/* Forgot Password */}
-            <TouchableOpacity style={mobStyles.forgotPasswordContainer}>
-              <Text
-                style={mobStyles.forgotPasswordText}
-                onPress={handleForgetPassword}
-              >
-                Forget Password ?
-              </Text>
-            </TouchableOpacity>
-
-            {/* Login Button */}
-            <TouchableOpacity
-              style={mobStyles.loginButton}
-              onPress={handleLogin}
-              disabled={loading}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color="#000" />
-              ) : (
-                <Text style={mobStyles.loginButtonText}>Login</Text>
-              )}
-            </TouchableOpacity>
-            {error ? <Text style={mobStyles.errorText}>{error}</Text> : null}
-
-            <Text style={{ marginBottom: 10, fontSize: 16, color: "#000" }}>
-              Or Login with
-            </Text>
-
-            <View style={mobStyles.socialButtonContainer}>
-              <TouchableOpacity
-                style={mobStyles.socialButton}
-                onPress={handleLogin}
-              >
-                <Image
-                  source={require("../assets/google.png")}
-                  style={{ width: 32, height: 32 }}
+            {/* Form Container */}
+            <View style={{ flex: 1, alignItems: "center" }}>
+              {/* Email or Phone input with error handling */}
+              <View style={{ width: "100%", marginBottom: 20 }}>
+                <FloatingLabelInput
+                  label="Email or phone"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="default"
+                  autoCapitalize="none"
+                  returnKeyType="next"
+                  // onSubmitEditing={handleSubmitEmail}
+                  testID="email-phone-input"
+                  isRequired={true}
+                  // error={getEmailOrPhoneError()}
+                  // showError={showErrors}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={mobStyles.socialButton}
-                onPress={handleLogin}
-              >
-                <Image
-                  source={require("../assets/facebook.png")}
-                  style={{ width: 32, height: 32 }}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={mobStyles.socialButtonContainer}>
-              <TouchableOpacity
-                style={mobStyles.socialButton}
-                onPress={handleLogin}
-              >
-                <Image
-                  source={require("../assets/twitter.png")}
-                  style={{ width: 32, height: 32 }}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={mobStyles.socialButton}
-                onPress={handleLogin}
-              >
-                <Image
-                  source={require("../assets/linkedin.png")}
-                  style={{ width: 32, height: 32 }}
-                />
-              </TouchableOpacity>
-            </View>
+              </View>
 
-            <View style={{ marginTop: 10 }}>
-              <Text style={{ fontSize: 14, color: "#666" }}>
-                By continuing, you agree to our Terms of Service and
-              </Text>
-              <Text style={mobStyles.privacyPolicyText}>Privacy Policy.</Text>
-            </View>
-            <View style={{ marginBottom: 20 }}>
-              <Text style={{ fontSize: 16, color: "#666666ff" }}>
-                New here?{" "}
-                <Text style={{ color: "blue" }} onPress={handleSignUp}>
-                  Create an account
+              {/* Password input with error handling */}
+              <View style={{ width: "100%", marginBottom: 10 }}>
+                <FloatingLabelInput
+                  label="Password"
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={true}
+                  showPasswordToggle={true}
+                  returnKeyType="done"
+                  // onSubmitEditing={handleSubmitPassword}
+                  testID="password-input"
+                  isRequired={true}
+                  // error={getPasswordError()}
+                  // showError={showErrors}
+                />
+              </View>
+
+              {/* Forgot Password */}
+              <TouchableOpacity style={mobStyles.forgotPasswordContainer}>
+                <Text
+                  style={mobStyles.forgotPasswordText}
+                  onPress={handleForgetPassword}
+                >
+                  Forget Password ?
                 </Text>
+              </TouchableOpacity>
+
+              {/* Login Button */}
+              <TouchableOpacity
+                style={mobStyles.loginButton}
+                onPress={handleLogin}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator size="small" color="#000" />
+                ) : (
+                  <Text style={mobStyles.loginButtonText}>Login</Text>
+                )}
+              </TouchableOpacity>
+              {error ? <Text style={mobStyles.errorText}>{error}</Text> : null}
+
+              <Text style={{ marginBottom: 10, fontSize: 16, color: "#000" }}>
+                Or Login with
               </Text>
+
+              <View style={mobStyles.socialButtonContainer}>
+                <TouchableOpacity
+                  style={mobStyles.socialButton}
+                  onPress={handleLogin}
+                >
+                  <Image
+                    source={require("../assets/google.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={mobStyles.socialButton}
+                  onPress={handleLogin}
+                >
+                  <Image
+                    source={require("../assets/facebook.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={mobStyles.socialButtonContainer}>
+                <TouchableOpacity
+                  style={mobStyles.socialButton}
+                  onPress={handleLogin}
+                >
+                  <Image
+                    source={require("../assets/twitter.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={mobStyles.socialButton}
+                  onPress={handleLogin}
+                >
+                  <Image
+                    source={require("../assets/linkedin.png")}
+                    style={{ width: 32, height: 32 }}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 14, color: "#666",justifyContent:"center",textAlign:"center" }}>
+                  By continuing, you agree to our Terms of Service and Privacy Policy.
+                </Text>
+              </View>
+              <View style={{ marginBottom: 20 }}>
+                <Text style={{ fontSize: 16, color: "#666666ff" }}>
+                  New here?{" "}
+                  <Text style={{ color: "blue" }} onPress={handleSignUp}>
+                    Create an account
+                  </Text>
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       ) : (
         <View style={webStyles.container}>
           <View style={{ width: "45%" }}>
@@ -242,7 +250,7 @@ const Login = () => {
           <View style={webStyles.rightInnerContainer}>
             <View style={webStyles.loginContainer}>
               <Image
-                source={require("../assets/E-Commerce Logo.jpg")}
+                source={require("../assets/E-Commerce-Logo.jpg")}
                 resizeMode="contain"
                 style={{ width: 100, height: 80 }}
               />
@@ -355,6 +363,13 @@ const Login = () => {
 export default Login;
 
 const mobStyles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: "#ffffff",

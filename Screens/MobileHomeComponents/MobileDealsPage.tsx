@@ -153,13 +153,18 @@ const MobileDealsPage = () => {
   }, []);
 
   useEffect(() => {
+    // Only start auto-scroll when we have products
+    if (dealsProducts.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % dealsProducts.length;
-        flatListRef.current?.scrollToIndex({
-          index: nextIndex,
-          animated: true,
-        });
+        if (flatListRef.current) {
+          flatListRef.current.scrollToIndex({
+            index: nextIndex,
+            animated: true,
+          });
+        }
         return nextIndex;
       });
     }, 3000);
@@ -235,7 +240,7 @@ const MobileDealsPage = () => {
             data={dealsProducts}
             horizontal
             showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.dealId?.toString() || Math.random().toString()}
             renderItem={({ item }) => (
               <MobileProductCard
                 imageSource={item.imageSource}

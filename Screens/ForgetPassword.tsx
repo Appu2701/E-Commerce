@@ -42,7 +42,7 @@ const ForgetPassword = () => {
         <View style={mobStyles.container}>
           {/* Logo */}
           <Image
-            source={require("../assets/E-Commerce Logo.jpg")}
+            source={require("../assets/E-Commerce-Logo.jpg")}
             style={mobStyles.logo}
             resizeMode="contain"
           />
@@ -246,7 +246,7 @@ const ForgetPassword = () => {
           <View style={webStyles.rightInnerContainer}>
             <View style={webStyles.forgetPassContainer}>
               <Image
-                source={require("../assets/E-Commerce Logo.jpg")}
+                source={require("../assets/E-Commerce-Logo.jpg")}
                 resizeMode="contain"
                 style={{ width: 100, height: 80 }}
               />
